@@ -1,0 +1,7 @@
+Sessionlog
+==========
+
+.. automodule:: cmapi.sessionlog
+   :members:
+   :undoc-members:
+   :show-inheritance:

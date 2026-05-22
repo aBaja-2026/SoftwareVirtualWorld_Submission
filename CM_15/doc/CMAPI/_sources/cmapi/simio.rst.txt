@@ -1,0 +1,7 @@
+SimIO
+=====
+
+.. automodule:: cmapi.simio
+   :members:
+   :undoc-members:
+   :show-inheritance:

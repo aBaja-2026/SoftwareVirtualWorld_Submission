@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImplementationManifest xsi:schemaLocation="http://www.asam.net/XIL/ImplementationManifest/2.1 ImplementationManifest.xsd" xmlns="http://www.asam.net/XIL/ImplementationManifest/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<PyTestbenchImplementation VendorName="IPG" ProductName="CarMaker" ProductVersion="$CARMAKER_SETVER$" XilVersion="2.1" TechnologyVersion="3.6.8">
+		<LibPaths>
+			<LibPath>$IPGHOMEMASKEDMK$/$PRODUCTDIR$/$ARCHBASENAME$-$CARMAKER_SETVER$/Python</LibPath>
+		</LibPaths>
+		<TestbenchClassModulName>IPG.XIL.Testbench</TestbenchClassModulName>
+		<TestbenchClassName>CMTestbench</TestbenchClassName>
+	</PyTestbenchImplementation>
+</ImplementationManifest>

@@ -1,0 +1,553 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="ApoConnection" href="cmapi/apoconnection.html" /><link rel="prev" title="SimControl Capabilities" href="getting_started/simcontrol.html" />
+        <link rel="prefetch" href="_static/IPG.png" as="image" />
+
+    <link rel="shortcut icon" href="_static/IPG_Icon_Trans64.png"/><!-- Generated with Sphinx 8.1.3 and Furo 2025.07.19 -->
+        <title>API Reference - CarMaker Python API 15.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="_static/admonition.css?v=4221c84c" />
+    <link rel="stylesheet" type="text/css" href="_static/header.css?v=e2be6fd5" />
+    <link rel="stylesheet" type="text/css" href="_static/colors.css?v=311e4d33" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">CarMaker Python API 15.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/IPG.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">CarMaker Python API 15.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started/getting_started.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/parametrizing_variations.html">Parametrizing Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/executing_variations_simcontrol.html">Executing variations using SimControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/executing_variations_runtime.html">Executing variations using Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/async_control_flow.html">Asynchronous Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/minimal_examples.html">Minimal working examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started/simcontrol.html">SimControl Capabilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/apoconnection.html">ApoConnection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposerverinfo.html">ApoServerInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposerver.html">ApoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposubscription.html">ApoSubscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_carmaker.html">Application Carmaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_movie.html">Application Movie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/appnode.html">Appnode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/category.html">Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/condition.html">Condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html">Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/nvalue.html">NValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parameter.html">Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization.html">Parametrization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_gpuconfig.html">Parametrization GPUConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_outputquantities.html">Parametrization Outputquantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/pathmapping.html">Pathmapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/project.html">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/runtime.html">Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/sessionlog.html">Sessionlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol.html">Simcontrol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_interactive.html">SimcontrolInteractive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_batch.html">SimcontrolBatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_batchcm4sl.html">SimcontrolBatchCM4SL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simio.html">SimIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simstate.html">SimState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess.html">StartupProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess_apobroker.html">StartupProcessApobroker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess_ssh.html">StartupProcessSSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/task.html">Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation_execution.html">VariationExecutionPolicy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation.html">Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/vehicle.html">Vehicle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="legal/legal_notice.html">Legal Notice</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/modules.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound" id="reference">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/apoconnection.html">ApoConnection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/apoconnection.html#cmapi.apoconnection.ApoVariableInfo"><code class="docutils literal notranslate"><span class="pre">ApoVariableInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/apoconnection.html#cmapi.apoconnection.ApoConnection"><code class="docutils literal notranslate"><span class="pre">ApoConnection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/aposerverinfo.html">ApoServerInfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposerverinfo.html#cmapi.aposerverinfo.ApoServerInfo"><code class="docutils literal notranslate"><span class="pre">ApoServerInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/aposerver.html">ApoServer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposerver.html#cmapi.aposerver.ApoServer"><code class="docutils literal notranslate"><span class="pre">ApoServer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/aposubscription.html">ApoSubscription</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposubscription.html#cmapi.aposubscription.ApoQuantity"><code class="docutils literal notranslate"><span class="pre">ApoQuantity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/aposubscription.html#cmapi.aposubscription.ApoSubscription"><code class="docutils literal notranslate"><span class="pre">ApoSubscription</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/application.html">Application</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application.html#cmapi.application.AppState"><code class="docutils literal notranslate"><span class="pre">AppState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application.html#cmapi.application.AppType"><code class="docutils literal notranslate"><span class="pre">AppType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application.html#cmapi.application.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/application_carmaker.html">Application Carmaker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_carmaker.html#cmapi.application_carmaker.CarMakerArch"><code class="docutils literal notranslate"><span class="pre">CarMakerArch</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_carmaker.html#cmapi.application_carmaker.CarMaker"><code class="docutils literal notranslate"><span class="pre">CarMaker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/application_movie.html">Application Movie</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_movie.html#cmapi.application_movie.GPUSensor"><code class="docutils literal notranslate"><span class="pre">GPUSensor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_movie.html#cmapi.application_movie.GPUSensorNX"><code class="docutils literal notranslate"><span class="pre">GPUSensorNX</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/application_movie.html#cmapi.application_movie.IPGMovie"><code class="docutils literal notranslate"><span class="pre">IPGMovie</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/appnode.html">Appnode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/appnode.html#cmapi.appnode.AppNode"><code class="docutils literal notranslate"><span class="pre">AppNode</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/category.html">Category</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/category.html#cmapi.category.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/condition.html">Condition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/condition.html#cmapi.condition.SimCondition"><code class="docutils literal notranslate"><span class="pre">SimCondition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/condition.html#cmapi.condition.RTExprCondition"><code class="docutils literal notranslate"><span class="pre">RTExprCondition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/condition.html#cmapi.condition.SimStateCondition"><code class="docutils literal notranslate"><span class="pre">SimStateCondition</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/condition.html#cmapi.condition.QuantityCondition"><code class="docutils literal notranslate"><span class="pre">QuantityCondition</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/error.html">Error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.InvalidStateError"><code class="docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.NotYetImplementedError"><code class="docutils literal notranslate"><span class="pre">NotYetImplementedError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.IncompleteConfigurationError"><code class="docutils literal notranslate"><span class="pre">IncompleteConfigurationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.InvalidConfigurationError"><code class="docutils literal notranslate"><span class="pre">InvalidConfigurationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.HostNotReachableError"><code class="docutils literal notranslate"><span class="pre">HostNotReachableError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.InvalidParameterException"><code class="docutils literal notranslate"><span class="pre">InvalidParameterException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.UnknownParameterException"><code class="docutils literal notranslate"><span class="pre">UnknownParameterException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.FileNotFoundException"><code class="docutils literal notranslate"><span class="pre">FileNotFoundException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.ParametrizationValidationError"><code class="docutils literal notranslate"><span class="pre">ParametrizationValidationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.SimulationError"><code class="docutils literal notranslate"><span class="pre">SimulationError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.StartupError"><code class="docutils literal notranslate"><span class="pre">StartupError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.MalformedVersionError"><code class="docutils literal notranslate"><span class="pre">MalformedVersionError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.NoFreeResourcesError"><code class="docutils literal notranslate"><span class="pre">NoFreeResourcesError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/error.html#cmapi.error.SchedulingImpossibleError"><code class="docutils literal notranslate"><span class="pre">SchedulingImpossibleError</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/nvalue.html">NValue</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/nvalue.html#cmapi.nvalue.NamedValue"><code class="docutils literal notranslate"><span class="pre">NamedValue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/parameter.html">Parameter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parameter.html#cmapi.parameter.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parameter.html#cmapi.parameter.KeyValue"><code class="docutils literal notranslate"><span class="pre">KeyValue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/parametrization.html">Parametrization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization.html#cmapi.parametrization.Parametrization"><code class="docutils literal notranslate"><span class="pre">Parametrization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization.html#cmapi.parametrization.TestRunParametrization"><code class="docutils literal notranslate"><span class="pre">TestRunParametrization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization.html#cmapi.parametrization.VehicleParametrization"><code class="docutils literal notranslate"><span class="pre">VehicleParametrization</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization.html#cmapi.parametrization.TrailerParametrization"><code class="docutils literal notranslate"><span class="pre">TrailerParametrization</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/parametrization_gpuconfig.html">Parametrization GPUConfig</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_gpuconfig.html#cmapi.parametrization_gpuconfig.GPUConfig"><code class="docutils literal notranslate"><span class="pre">GPUConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/parametrization_outputquantities.html">Parametrization Outputquantities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_outputquantities.html#cmapi.parametrization_outputquantities.OutputFrequency"><code class="docutils literal notranslate"><span class="pre">OutputFrequency</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_outputquantities.html#cmapi.parametrization_outputquantities.OutputFormat"><code class="docutils literal notranslate"><span class="pre">OutputFormat</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/parametrization_outputquantities.html#cmapi.parametrization_outputquantities.OutputQuantities"><code class="docutils literal notranslate"><span class="pre">OutputQuantities</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/pathmapping.html">Pathmapping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/pathmapping.html#cmapi.pathmapping.PathMapping"><code class="docutils literal notranslate"><span class="pre">PathMapping</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/project.html">Project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/project.html#cmapi.project.Project"><code class="docutils literal notranslate"><span class="pre">Project</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/resource.html">Resource</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.ResourceType"><code class="docutils literal notranslate"><span class="pre">ResourceType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.ResourceDescription"><code class="docutils literal notranslate"><span class="pre">ResourceDescription</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.ResourcePool"><code class="docutils literal notranslate"><span class="pre">ResourcePool</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.StaticConfigResourcePool"><code class="docutils literal notranslate"><span class="pre">StaticConfigResourcePool</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.StaticConfigResourcePoolCarMaker"><code class="docutils literal notranslate"><span class="pre">StaticConfigResourcePoolCarMaker</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.StaticConfigResourcePoolCM4SL"><code class="docutils literal notranslate"><span class="pre">StaticConfigResourcePoolCM4SL</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.StaticConfigResourcePoolGPUSensor"><code class="docutils literal notranslate"><span class="pre">StaticConfigResourcePoolGPUSensor</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/resource.html#cmapi.resource.StaticConfigResourcePoolGPUSensorNX"><code class="docutils literal notranslate"><span class="pre">StaticConfigResourcePoolGPUSensorNX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/runtime.html">Runtime</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/runtime.html#cmapi.runtime.Runtime"><code class="docutils literal notranslate"><span class="pre">Runtime</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/sessionlog.html">Sessionlog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/sessionlog.html#cmapi.sessionlog.LogEntryType"><code class="docutils literal notranslate"><span class="pre">LogEntryType</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/sessionlog.html#cmapi.sessionlog.SessionLogEntry"><code class="docutils literal notranslate"><span class="pre">SessionLogEntry</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/sessionlog.html#cmapi.sessionlog.SessionLog"><code class="docutils literal notranslate"><span class="pre">SessionLog</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simcontrol.html">Simcontrol</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol.html#cmapi.simcontrol.SimControlState"><code class="docutils literal notranslate"><span class="pre">SimControlState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol.html#cmapi.simcontrol.SimControl"><code class="docutils literal notranslate"><span class="pre">SimControl</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simcontrol_interactive.html">SimcontrolInteractive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_interactive.html#cmapi.simcontrol_interactive.SimControlNotConnectedError"><code class="docutils literal notranslate"><span class="pre">SimControlNotConnectedError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_interactive.html#cmapi.simcontrol_interactive.SimControlInteractive"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simcontrol_batch.html">SimcontrolBatch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_batch.html#cmapi.simcontrol_batch.SimControlBatch"><code class="docutils literal notranslate"><span class="pre">SimControlBatch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simcontrol_batchcm4sl.html">SimcontrolBatchCM4SL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simcontrol_batchcm4sl.html#cmapi.simcontrol_batchcm4sl.SimControlBatchCM4SL"><code class="docutils literal notranslate"><span class="pre">SimControlBatchCM4SL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simio.html">SimIO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simio.html#cmapi.simio.SimIO"><code class="docutils literal notranslate"><span class="pre">SimIO</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simio.html#cmapi.simio.CarMakerApplicationInfo"><code class="docutils literal notranslate"><span class="pre">CarMakerApplicationInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/simstate.html">SimState</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simstate.html#cmapi.simstate.ConditionSimState"><code class="docutils literal notranslate"><span class="pre">ConditionSimState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simstate.html#cmapi.simstate.ApplicationSimState"><code class="docutils literal notranslate"><span class="pre">ApplicationSimState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simstate.html#cmapi.simstate.ExecutionState"><code class="docutils literal notranslate"><span class="pre">ExecutionState</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/simstate.html#cmapi.simstate.SimState"><code class="docutils literal notranslate"><span class="pre">SimState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/startupprocess.html">StartupProcess</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess.html#cmapi.startupprocess.StartupProcess"><code class="docutils literal notranslate"><span class="pre">StartupProcess</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess.html#cmapi.startupprocess.StartupProcessNormal"><code class="docutils literal notranslate"><span class="pre">StartupProcessNormal</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/startupprocess_apobroker.html">StartupProcessApobroker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess_apobroker.html#cmapi.startupprocess_apobroker.StartupProcessApobroker"><code class="docutils literal notranslate"><span class="pre">StartupProcessApobroker</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/startupprocess_ssh.html">StartupProcessSSH</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess_ssh.html#cmapi.startupprocess_ssh.StartupProcessSSH"><code class="docutils literal notranslate"><span class="pre">StartupProcessSSH</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/startupprocess_ssh.html#cmapi.startupprocess_ssh.StartupProcessSSHApoclient"><code class="docutils literal notranslate"><span class="pre">StartupProcessSSHApoclient</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/task.html">Task</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/task.html#cmapi.task.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/testrun.html">TestRun</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/testrun.html#cmapi.testrun.TestRun"><code class="docutils literal notranslate"><span class="pre">TestRun</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/variation_execution.html">VariationExecutionPolicy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation_execution.html#cmapi.variation_execution.VariationExecutionPolicy"><code class="docutils literal notranslate"><span class="pre">VariationExecutionPolicy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation_execution.html#cmapi.variation_execution.VariationExecutionPolicyInteractive"><code class="docutils literal notranslate"><span class="pre">VariationExecutionPolicyInteractive</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation_execution.html#cmapi.variation_execution.VariationExecutionPolicyBatch"><code class="docutils literal notranslate"><span class="pre">VariationExecutionPolicyBatch</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/variation.html">Variation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation.html#cmapi.variation.StorageMode"><code class="docutils literal notranslate"><span class="pre">StorageMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation.html#cmapi.variation.SimulationMode"><code class="docutils literal notranslate"><span class="pre">SimulationMode</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation.html#cmapi.variation.SimEndInfo"><code class="docutils literal notranslate"><span class="pre">SimEndInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/variation.html#cmapi.variation.Variation"><code class="docutils literal notranslate"><span class="pre">Variation</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmapi/vehicle.html">Vehicle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/vehicle.html#cmapi.vehicle.Vehicle"><code class="docutils literal notranslate"><span class="pre">Vehicle</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/vehicle.html#cmapi.vehicle.Trailer"><code class="docutils literal notranslate"><span class="pre">Trailer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmapi/vehicle.html#cmapi.vehicle.SensorCluster"><code class="docutils literal notranslate"><span class="pre">SensorCluster</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="cmapi/apoconnection.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ApoConnection</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="getting_started/simcontrol.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">SimControl Capabilities</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, IPG Automotive GmbH
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=cb975c41"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

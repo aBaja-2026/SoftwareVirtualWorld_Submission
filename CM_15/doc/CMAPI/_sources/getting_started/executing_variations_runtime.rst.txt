@@ -1,0 +1,184 @@
+Executing variations using Runtime
+==================================
+
+The :class:`cmapi.Runtime` offers a high-level interface to directly run variations without the need to manually manage runtime applications and background tasks. Similar to the Test Manager of the CarMaker GUI, it can run multiple variations in parallel.
+
+The most basic example of simulating a variation with CarMaker Python API utilizes a :class:`cmapi.Runtime` object preconfigured with default settings created by :meth:`cmapi.Runtime.create_default_runtime`:
+
+.. code-block:: python
+
+    runtime = cmapi.Runtime.create_default_runtime()
+    await runtime.queue_variation(variation)
+    await runtime.start()
+    await runtime.wait_until_completed()
+    await runtime.stop()
+
+By using only defaults, the :class:`cmapi.Runtime` does not show its full potential yet, because it is configured to run at most one variation at a time with all runtime applications running on localhost.
+
+The default behavior of the Runtime in regard to parallelization can be changed by supplying additional nodes for simulation and visualization applications.
+
+On a per variation level its behavior can be influenced by adapting the :class:`cmapi.VariationExecutionPolicy` of a queued Variation.
+
+Adapting variation execution policies
+-------------------------------------
+
+The :class:`cmapi.VariationExecutionPolicy` of a :class:`cmapi.Variation` contains all :class:`cmapi.Runtime`-related execution instructions, and is only required, if run by a :class:`cmapi.Runtime` object. It can be inspected by calling :meth:`cmapi.Variation.get_execution_policy`. The default execution policy, which is :class:`cmapi.VariationExecutionPolicyBatch`, can be replaced with :meth:`cmapi.Variation.set_execution_policy`.
+
+Resources:
+~~~~~~~~~~
+
+In order to be processed by the runtime, a variation must state a quantity of computational Resources which are required to run the variation, according to its :class:`cmapi.VariationExecutionPolicy`. The runtime internally tries to satisfy the resource requests (e.g., offering :class:`cmapi.GPUSensor` processes) of a queued variation, while staying within the quantity limits, which can be configured for each resource independently. Resources are temporarily transferred to the running variation, and are returned to the runtime on end of simulation. If there are free resources, additional variations are started by the runtime in parallel.
+
+Required resources can be inspected by calling :meth:`cmapi.Variation.get_resource_descriptions`, returning a list of :class:`cmapi.ResourceDescription`, containing the name and :class:`cmapi.ResourceType` of the resource as well as optional scheduling tags and a reference to the claimed resource object once the request has been served by the runtime.
+
+If a variation is queued with one of :class:`cmapi.VariationExecutionPolicyBatch` or :class:`cmapi.VariationExecutionPolicyInteractive`, which are the default implementations of class:`cmapi.VariationExecutionPolicy` of CarMaker API, it requests resources of type :class:`cmapi.ResourceType.CarMaker`, :class:`cmapi.ResourceType.CM4SL` and :class:`cmapi.ResourceType.GPUSensor` according to the configured Test Run and vehicle. All of these can be satisfied by a Runtime created with :meth:`cmapi.Runtime.create_default_runtime`, which uses predefined :class:`cmapi.ResourcePools` for these resource types. Introducing an additional user-defined limited resource type by adapting a variation's :class:`cmapi.VariationExecutionPolicy`, also requires an additional :class:`cmapi.ResourcePool` for this type to be installed on the runtime, in order to run this variation.
+
+To request additional resources from the runtime, :meth:`cmapi.VariationExecutionPolicy.create_resource_descriptions` may be overridden:
+
+.. code-block:: python
+
+    class AdditionalResourceExecutionPolicy(cmapi.VariationExecutionPolicyInteractive):
+        @classmethod
+        async def create_resource_descriptions(cls, variation):
+            resources = super().create_resource_descriptions()
+            resources.append(cmapi.ResourceDescription.create("my resource", cmapi.ResourceType.MyResource))
+            return resources
+
+    variation.set_execution_policy(AdditionalResourceExecutionPolicy)
+
+During execution, the resource is now available in the variation via :meth:`cmapi.Variation.get_resource`, and can be used in one of the :class:`cmapi.VariationExecutionPolicy`'s methods, accessing it by its resource description name:
+
+.. code-block:: python
+
+    ...
+    async def run_variation(cls, variation):
+        myresource = variation.get_resource("my resource")
+        ...
+
+Execution:
+~~~~~~~~~~
+
+The VariationExecutionPolicy contains several methods which are called by the executing :class:`cmapi.Runtime` over the course of a variation's execution:
+
+  - :meth:`cmapi.VariationExecutionPolicy.start_variation`
+  - :meth:`cmapi.VariationExecutionPolicy.run_variation`
+  - :meth:`cmapi.VariationExecutionPolicy.stop_variation`
+  - :meth:`cmapi.VariationExecutionPolicy.cancel_variation`
+
+These functions may be adapted by the user. The following example shows how execution of an individual variation can be influenced by altering its execution policy to briefly suspend execution and collect some DVA output.
+
+.. code-block:: python
+
+    class DVAExecutionPolicy(cmapi.VariationExecutionPolicyInteractive):
+        @classmethod
+        async def run_variation(cls, variation):
+            simcontrol = variation.get_simcontrol()
+
+            await simcontrol.start_sim()
+            await asyncio.sleep(1.0)
+            variation.my_dva_car_v_result, *_ = await simcontrol.simio.dva_read_async("Car.v")
+            await simcontrol.await_condition(simcontrol.simstate.condition_finished)
+
+    variation.set_execution_policy(DVAExecutionPolicy)
+
+Variation specific behavior can be passed into the customized execution policy directly via the :class:`cmapi.Variation` object parameter.
+
+Configuring Runtime simulation nodes
+------------------------------------
+
+Configuring host nodes means adapting the runtime's :class:`cmapi.ResourcePools`. For the predefined resource types :class:`cmapi.ResourceType.CarMaker`, :class:`cmapi.ResourceType.CM4SL` and :class:`cmapi.ResourceType.GPUSensor`, :class:`cmapi.ResourcePool` implementations of type :class:`cmapi.StaticConfigResourcePoolCarMaker`, :class:`cmapi.StaticConfigResourcePoolCM4SL` and :class:`cmapi.StaticConfigResourcePoolGPUSensor` are used. Static config means there is a fixed amount of available resources, which can be characterized by an initially given configuration, which stays the same over the lifetime of the resource pool.
+
+The configuration of these :class:`cmapi.StaticConfigResourcePool` consists of a list of :class:`cmapi.AppNode`, each containing a network host name, index of the host's hardware device, maximum capacity and scheduling tags (equivalent to the tags used for GPU Sensor Clusters in CarMaker GUI). In fact :class:`cmapi.StaticConfigResourcePoolGPUSensor`'s application node configuration can be taken from a GPU configuration file created with the CarMaker GUI by loading it as :class:`cmapi.GPUConfig`, which is a specialization of :class:`cmapi.Parametrization` and can directly return the list of :class:`cmapi.AppNode` in the file:
+
+.. code-block:: python
+
+    config = cmapi.GPUConfig()
+    config.set_path(Path("Data/Misc/GPUConfig"))
+    cmapi.Project.instance().load_parametrization(config)
+    resource_pool.set_app_nodes(config.get_nodes())
+
+The returned nodes have unlimited capacity each. Alternatively, the resource pool may be manually configured with nodes which must be passed as list to :meth:`cmapi.StaticConfigResourcePool.set_app_nodes`:
+
+.. code-block:: python
+
+    pool = cmapi.StaticConfigResourcePoolCarMaker()
+    pool.set_app_nodes([cmapi.AppNode.create(cmapi.get_hostname(), 0, 10)]) # Max 10 parallel CarMaker processes
+
+Adding or replacing a resource pool of Runtime is done by calling :meth:`cmapi.Runtime.set_resourcepool` while the runtime is stopped:
+
+.. code-block:: python
+
+    runtime.set_resourcepool(cmapi.ResourceType.CarMaker, pool)
+
+Specifying remote hosts as :class:`cmapi.AppNode` is perfectly fine and calls :meth:`cmapi.Application.set_host` internally when an application is created by the :class:`cmapi.StaticConfigResourcePool` for a given application node slot.
+
+Full example
+------------
+
+.. code-block:: python
+
+    from parametrization_full_example import *
+
+
+    async def main():
+        variation, variation_trailer = await make_variations()
+
+        cmapi.logger.info(f"Executing with Runtime sequential...")
+
+        # Make a custom execution policy using a DVA read
+        class DVAExecutionPolicy(cmapi.VariationExecutionPolicyInteractive):
+            @classmethod
+            async def run_variation(cls, variation):
+
+                simcontrol = variation.get_simcontrol()
+                await simcontrol.start_sim()
+
+                condition = simcontrol.create_quantity_condition(lambda car_v: car_v > 10.0, "Car.v")
+                await condition.wait()
+
+                time_10, = await simcontrol.simio.dva_read_async("Time")
+                cmapi.logger.info(f"{variation.get_name()}: Reached speed 10 m/s after {time_10} seconds")
+
+                await simcontrol.await_condition(simcontrol.simstate.condition_finished)
+
+
+        variation.set_execution_policy(DVAExecutionPolicy)
+        variation_trailer.set_execution_policy(DVAExecutionPolicy)
+
+        runtime = cmapi.Runtime.create_default_runtime()
+
+        await runtime.queue_variation(variation)
+        await runtime.queue_variation(variation_trailer)
+
+        await runtime.start()
+        await runtime.wait_until_completed()
+        await runtime.stop()
+
+        cmapi.logger.info(f"Execution with Runtime sequential finished.")
+
+        cmapi.logger.info(f"Execution with Runtime in parallel...")
+
+        pool = cmapi.StaticConfigResourcePoolCarMaker()
+        pool.set_app_nodes([cmapi.AppNode.create(cmapi.get_hostname(), 0, 10)])
+
+        runtime.set_resourcepool(cmapi.ResourceType.CarMaker, pool)
+
+        variation.reset()
+        variation_trailer.reset()
+
+        await runtime.queue_variation(variation)
+        await runtime.queue_variation(variation_trailer)
+
+        await runtime.start()
+        await runtime.wait_until_completed()
+        await runtime.stop()
+
+        cmapi.logger.info(f"Execution with Runtime parallel finished.")
+
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+  Download full example <simcontrol_example.py>`_

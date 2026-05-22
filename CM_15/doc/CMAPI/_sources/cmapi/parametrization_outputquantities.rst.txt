@@ -1,0 +1,7 @@
+Parametrization Outputquantities
+================================
+
+.. automodule:: cmapi.parametrization_outputquantities
+   :members:
+   :undoc-members:
+   :show-inheritance:

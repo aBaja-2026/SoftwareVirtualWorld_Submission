@@ -1,0 +1,8 @@
+ApoServerInfo
+=============
+
+.. automodule:: cmapi.aposerverinfo
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: query_aposerverinfos

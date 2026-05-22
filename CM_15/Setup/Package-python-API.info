@@ -1,0 +1,21 @@
+#INFOFILE1.1
+#
+# IPG Automotive GmbH Karlsruhe/Germany -- www.ipg-automotive.com
+#
+
+FileIdent =         PackageInfo 1.0
+SubPackage =        CarMakerAddOn-python-API
+Version =           15.0
+ProductName =       Python-API-py3.9..3.13 Add-On
+BasePackages:
+	15.*       CarMaker
+
+HostArch =        win64
+
+Depends.Installer = 1.54
+SetupProg =         bin/Setup-python-API.tcl
+
+Package.Timestamp = 1763037617 "2025-11-13 13:40:17"
+Package.Size =      22024
+Package.nFiles =    483
+Package.nDirs =     80

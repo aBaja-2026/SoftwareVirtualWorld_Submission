@@ -1,0 +1,7 @@
+SimcontrolInteractive
+=====================
+
+.. automodule:: cmapi.simcontrol_interactive
+   :members:
+   :undoc-members:
+   :show-inheritance:

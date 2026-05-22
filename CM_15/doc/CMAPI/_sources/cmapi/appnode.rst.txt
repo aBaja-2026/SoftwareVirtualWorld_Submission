@@ -1,0 +1,7 @@
+Appnode
+=======
+
+.. automodule:: cmapi.appnode
+   :members:
+   :undoc-members:
+   :show-inheritance:

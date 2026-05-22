@@ -1,0 +1,14 @@
+ApoConnection
+=============
+
+
+.. autoclass:: cmapi.apoconnection.ApoVariableInfo()
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: __init__, tuple
+
+.. autoclass:: cmapi.apoconnection.ApoConnection
+   :members:
+   :undoc-members:
+   :show-inheritance:

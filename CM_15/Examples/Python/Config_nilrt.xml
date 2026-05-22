@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PortConfigurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <MAPortConfig>
+        <ProjectDir>%YourProject%</ProjectDir>
+        <Platform>nilrt</Platform>
+        <NIConfig>NIPortConfiguration.xml</NIConfig>
+        <Hostname>rt-ni2</Hostname>
+    </MAPortConfig>
+</PortConfigurations>

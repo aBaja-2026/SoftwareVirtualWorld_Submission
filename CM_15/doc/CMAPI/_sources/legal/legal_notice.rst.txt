@@ -1,0 +1,52 @@
+Legal Notice
+============
+
+Provider contact
+----------------
+| IPG Automotive GmbH
+| Fautenbruchstraße 46
+| 76137 Karlsruhe
+| +49 721 98520-0
+| support@ipg-automotive.com
+
+President & Chief Executive Officer
+-----------------------------------
+| Dipl.-Ing. Steffen Schmidt
+| Register Court Mannheim, HRB 104070
+| VAT identification number: DE 143 597 753
+| Copyright |copyright_year| IPG Automotive GmbH. All Rights Reserved.
+
+
+Disclaimer
+-----------
+The information in this document is furnished for informational use only, may be revised from time to time, and should not be construed as a commitment by IPG Automotive GmbH and its affiliates. IPG Automotive GmbH and its affiliates assumes no responsibility or liability for any errors or inaccuracies that may appear in this document.
+
+This document contains proprietary and copyrighted information and may not be copied, reproduced, translated, or reduced to any electronic medium without prior consent, in writing, from IPG Automotive GmbH.
+
+For better readability, the masculine form is used for personal designations and words referring to persons in this documentation. In the interests of equal treatment, the corresponding terms apply to all genders as we are an inclusive and diverse organization and we recognize the diversity. The abbreviated form of language is for editorial reasons only and does not imply any judgment.
+
+© 1999 – |copyright_year| by IPG Automotive GmbH – `https://www.ipg-automotive.com <https://www.ipg-automotive.com>`_
+
+All rights reserved.
+
+Fail Safe Tester, IPGCar, IPGControl, IPGDriver, IPGEngine, IPGGraph, IPGKinematics, IPGLock, IPGMotorcycle, IPGMovie, IPGRoad, IPGRoaddata, IPGTire, IPGTrailer, IPGTruck, RealtimeMaker, Xpack4 are trademarks of the IPG Automotive GmbH.
+
+CarMaker, TruckMaker, MotorcycleMaker, MESA VERDE, VIRTO, IPG, IPG Automotive are registered trademarks of IPG Automotive GmbH.
+
+All other product names are trademarks of their respective companies.
+
+Affiliate means any corporate body of which IPG Automotive GmbH has a majority stake.
+
+All CarMaker variants use several open source components. Please refer to the files FOSS-Licenses.html and FOSS-Licenses.pdf in the /doc folder of the CarMaker installation directory for more details.
+
+CarMaker variants use additional components of proprietary third-party software. The corresponding end-user license agreements (EULA) can be found in directory doc/EULA-3rd-Party of each CarMaker installation.
+
+RealtimeMaker uses several open source components. Please refer to the files FOSS-Licenses.html and FOSS-Licenses.pdf in the /doc folder of the RealtimeMaker installation directory for more details.
+
+Movie NX: portions of this software Copyright © |copyright_year| Unigine. All rights reserved. Used under license. Qt licensed under the Lesser General Public License (LGPL) version 3.
+
+To obtain the Qt source code please contact support@ipg-automotive.com.
+
+Movie NX uses several open source components. Please refer to the files FOSS-Licenses.html and FOSS-Licenses.pdf in the /doc folder of the Movie NX installation directory for more details.
+
+IPGControl uses several open source components. Please refer to the files FOSS-Licenses.html and FOSS-Licenses.pdf in the /doc folder of the IPGControl installation directory for more details.

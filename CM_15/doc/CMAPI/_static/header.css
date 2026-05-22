@@ -1,0 +1,14 @@
+/* Add spacing between all header buttons for better visual separation */
+.header-buttons > * {
+    margin-left: 0.5em;  /* Space between buttons */
+}
+
+/* Remove left margin from the first header button to align it with the container */
+.header-buttons > *:first-child {
+    margin-left: 0; /* No space before the first button */
+}
+
+/* Add right margin to the theme toggle button for spacing from the hamburger icon */
+.theme-toggle {
+    margin-right: 1.0em !important; /* Space to the hamburger icon */
+}

@@ -1,0 +1,117 @@
+/* =====================================
+   Custom Admonitions for Sphinx
+   Tip, Caution, Warning, Note
+   ===================================== */
+
+/* Make the entire box unified */
+div.admonition {
+    border: none;
+    border-left: 5px solid;
+    border-radius: 4px;
+    overflow: hidden; /* Ensures the title bar and body share same background edge */
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-size: 20px auto;
+    padding: 10px 20px 10px 40px; /* Space for icon on left */
+    margin: 20px 10px;
+}
+
+/* Remove default Sphinx / theme icons from admonitions */
+div.admonition::before,
+div.admonition > p.admonition-title::before {
+    content: none !important;
+    background: none !important;
+    display: none !important;
+}
+
+/* Force the title bar to share same background and alignment */
+div.admonition > .admonition-title {
+    margin: 0;
+    margin-bottom: 1.5em;
+    padding: 0; /* Remove its internal padding */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Montserrat ExtraBold', sans-serif;
+    color: #34373b;
+    background: transparent !important; /* Remove different header background */
+    display: block;
+}
+/* ---- TIP ---- */
+div.admonition.tip,
+div.Tip {
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-image: url('lightbulb02.png');
+    background-color: #f8fcf6;
+    background-size: 20px auto;
+    border-left: 5px solid #4cac1d;
+    padding: 10px 20px 10px 40px;
+    margin: 20px 10px 20px 0;
+}
+
+div.admonition.tip > .admonition-title,
+.TipKeyword {
+    text-transform: uppercase;
+    color: #34373b;
+    font-family: 'Montserrat ExtraBold';
+}
+
+/* ---- CAUTION ---- */
+div.admonition.caution,
+div.Caution {
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-image: url('alert-octagon.png');
+    background-color: #fefafa;
+    background-size: 20px auto;
+    border-left: 5px solid #ff9e00;
+    padding: 12px 20px 10px 40px;
+    margin: 20px 10px 20px 0;
+}
+
+div.admonition.caution > .admonition-title,
+.CautionKeyword {
+    text-transform: uppercase;
+    color: #34373b;
+    font-family: 'Montserrat ExtraBold';
+}
+
+/* ---- WARNING ---- */
+div.admonition.warning,
+div.Warning {
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-image: url('alert-triangle.png');
+    background-color: #fff5e6;
+    background-size: 20px auto;
+    border-left: 5px solid #bf1111;
+    padding: 10px 10px 10px 40px;
+    margin: 20px 10px 20px 0;
+}
+
+div.admonition.warning > .admonition-title,
+.WarningKeyword {
+    text-transform: uppercase;
+    color: #34373b;
+    font-family: 'Montserrat ExtraBold';
+}
+
+/* ---- NOTE ---- */
+div.admonition.note,
+div.Note {
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-image: url('info-circle.png');
+    background-color: #f3f6f9;
+    background-size: 20px auto;
+    border-left: 5px solid #5e8ab4;
+    padding: 10px 10px 10px 40px;
+    margin: 20px 10px 20px 0;
+}
+
+div.admonition.note > .admonition-title,
+.NoteKeyword {
+    text-transform: uppercase;
+    color: #34373b;
+    font-family: 'Montserrat ExtraBold';
+}

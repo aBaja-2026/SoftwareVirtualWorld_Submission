@@ -1,0 +1,7 @@
+Task
+====
+
+.. automodule:: cmapi.task
+   :members:
+   :undoc-members:
+   :show-inheritance:

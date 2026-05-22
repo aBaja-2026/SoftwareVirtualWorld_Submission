@@ -1,0 +1,7 @@
+TestRun
+=======
+
+.. automodule:: cmapi.testrun
+   :members:
+   :undoc-members:
+   :show-inheritance:

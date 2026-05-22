@@ -1,0 +1,9 @@
+./Examples/Python/1_ReadWrite.py.cmt
+./Examples/Python/2_BasicCapturing.py.cmt
+./Examples/Python/3_CapturingWithDurationWatcher.py.cmt
+./Examples/Python/4_CapturingWithConditionWatcher.py.cmt
+./Examples/Python/5_CaptureToFile.py.cmt
+./Examples/Python/6_MultiFetch.py.cmt
+./Examples/Python/7_ConfigurationParameters.py.cmt
+./Examples/Python/IPG_ImplementationManifest.imf.cmt
+./Examples/Python/userconfig.py.cmt

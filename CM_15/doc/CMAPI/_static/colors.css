@@ -1,0 +1,150 @@
+/* Erzwingt Light Mode für Dark Mode und Auto Mode in Furo Theme */
+
+body[data-theme="dark"],
+body[data-theme="auto"] {
+  --color-problematic: #b30000;
+
+  /* Base Colors */
+  --color-foreground-primary: black;
+  --color-foreground-secondary: #5a5c63;
+  --color-foreground-muted: #6b6f76;
+  --color-foreground-border: #878787;
+
+  --color-background-primary: white;
+  --color-background-secondary: #f8f9fb;
+  --color-background-hover: #efeff4ff;
+  --color-background-hover--transparent: #efeff400;
+  --color-background-border: #eeebee;
+  --color-background-item: #ccc;
+
+  /* Announcements */
+  --color-announcement-background: #000000dd;
+  --color-announcement-text: #eeebee;
+
+  /* Brand colors */
+  --color-brand-primary: #0a4bff;
+  --color-brand-content: #2757dd;
+  --color-brand-visited: #872ee0;
+
+  /* API documentation */
+  --color-api-background: var(--color-background-hover--transparent);
+  --color-api-background-hover: var(--color-background-hover);
+  --color-api-overall: var(--color-foreground-secondary);
+  --color-api-name: var(--color-problematic);
+  --color-api-pre-name: var(--color-problematic);
+  --color-api-paren: var(--color-foreground-secondary);
+  --color-api-keyword: var(--color-foreground-primary);
+
+  --color-api-added: #21632c;
+  --color-api-added-border: #38a84d;
+  --color-api-changed: #046172;
+  --color-api-changed-border: #06a1bc;
+  --color-api-deprecated: #605706;
+  --color-api-deprecated-border: #f0d90f;
+  --color-api-removed: #b30000;
+  --color-api-removed-border: #ff5c5c;
+
+  --color-highlight-on-target: #ffffcc;
+
+  /* Inline code background */
+  --color-inline-code-background: var(--color-background-secondary);
+
+  /* Highlighted text (search) */
+  --color-highlighted-background: #ddeeff;
+  --color-highlighted-text: var(--color-foreground-primary);
+
+  /* GUI Labels */
+  --color-guilabel-background: #ddeeff80;
+  --color-guilabel-border: #bedaf580;
+  --color-guilabel-text: var(--color-foreground-primary);
+
+  /* Admonitions */
+  --color-admonition-background: transparent;
+
+  /* Tables */
+  --color-table-header-background: var(--color-background-secondary);
+  --color-table-border: var(--color-background-border);
+
+  /* Cards */
+  --color-card-border: var(--color-background-secondary);
+  --color-card-background: transparent;
+  --color-card-marginals-background: var(--color-background-secondary);
+
+  /* Header */
+  --color-header-background: var(--color-background-primary);
+  --color-header-border: var(--color-background-border);
+  --color-header-text: var(--color-foreground-primary);
+
+  /* Sidebar (left) */
+  --color-sidebar-background: var(--color-background-secondary);
+  --color-sidebar-background-border: var(--color-background-border);
+
+  --color-sidebar-brand-text: var(--color-foreground-primary);
+  --color-sidebar-caption-text: var(--color-foreground-muted);
+  --color-sidebar-link-text: var(--color-foreground-secondary);
+  --color-sidebar-link-text--top-level: var(--color-brand-primary);
+
+  --color-sidebar-item-background: var(--color-sidebar-background);
+  --color-sidebar-item-background--current: var(--color-sidebar-item-background);
+  --color-sidebar-item-background--hover: linear-gradient(
+    90deg,
+    var(--color-background-hover--transparent) 0%,
+    var(--color-background-hover) var(--sidebar-item-spacing-horizontal),
+    var(--color-background-hover) 100%
+  );
+
+  --color-sidebar-item-expander-background: transparent;
+  --color-sidebar-item-expander-background--hover: var(--color-background-hover);
+
+  --color-sidebar-search-text: var(--color-foreground-primary);
+  --color-sidebar-search-background: var(--color-background-secondary);
+  --color-sidebar-search-background--focus: var(--color-background-primary);
+  --color-sidebar-search-border: var(--color-background-border);
+  --color-sidebar-search-icon: var(--color-foreground-muted);
+
+  /* Table of Contents (right) */
+  --color-toc-background: var(--color-background-primary);
+  --color-toc-title-text: var(--color-foreground-muted);
+  --color-toc-item-text: var(--color-foreground-secondary);
+  --color-toc-item-text--hover: var(--color-foreground-primary);
+  --color-toc-item-text--active: var(--color-brand-primary);
+
+  /* Actual page contents */
+  --color-content-foreground: var(--color-foreground-primary);
+  --color-content-background: transparent;
+
+  /* Links */
+  --color-link: var(--color-brand-content);
+  --color-link-underline: var(--color-background-border);
+  --color-link--hover: var(--color-brand-content);
+  --color-link-underline--hover: var(--color-foreground-border);
+
+  --color-link--visited: var(--color-brand-visited);
+  --color-link-underline--visited: var(--color-background-border);
+  --color-link--visited--hover: var(--color-brand-visited);
+  --color-link-underline--visited--hover: var(--color-foreground-border);
+}
+
+/* Erzwinge Light Mode als Basis-Theme */
+:root {
+  color-scheme: light !important;
+}
+
+/* Style for all parts of API names in function/class signatures.
+   Applies a consistent color and bold font to improve readability
+   in Sphinx-generated documentation. */
+.sig-prename,                   /* Namespace or module part of the signature */
+.sig-name,                      /* Main name in the signature */
+.sig-dot,                       /* Dots separating parts of the signature */
+.descname                       /* Description name (fallback for some themes) */
+.sig-class,                     /* Class names in signatures */
+.sig-function,                  /* Function names in signatures */
+.sig-method {                   /* Method names in signatures */
+    color: #5e8ab4 !important;  /* Custom IPG blue for API names */
+    font-weight: bold;          /* Make API names stand out */
+}
+
+
+.theme-toggle {
+  display: none !important;
+}

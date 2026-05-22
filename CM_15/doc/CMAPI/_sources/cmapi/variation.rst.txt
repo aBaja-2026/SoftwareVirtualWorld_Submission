@@ -1,0 +1,7 @@
+Variation
+=========
+
+.. automodule:: cmapi.variation
+   :members:
+   :undoc-members:
+   :show-inheritance:

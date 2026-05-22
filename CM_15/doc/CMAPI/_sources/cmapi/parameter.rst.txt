@@ -1,0 +1,7 @@
+Parameter
+=========
+
+.. automodule:: cmapi.parameter
+   :members:
+   :undoc-members:
+   :show-inheritance:

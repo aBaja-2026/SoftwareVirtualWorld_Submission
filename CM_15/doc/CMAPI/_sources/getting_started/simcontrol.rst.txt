@@ -1,0 +1,34 @@
+SimControl Capabilities
+=======================
+
+:class:`cmapi.SimControlInteractive` establishes a background APO connection to the simulation program. This offers an extended set of commands to influence the simulation during runtime. However, it comes at the cost of higher network overhead and slightly slower execution. While it is possible, to run multiple simulations in parallel using SimControlInteractive, for parallel simulation :class:`cmapi.SimControlBatch` might be the better choice.
+
+For co-simulation with Simulink currently only batch mode is available via :class:`cmapi.SimControlBatchCM4SL`.
+
++-------------------------------+------------------------+-------------------+------------------------+
+| Function                      | SimControlInteractive  | SimControlBatch   | SimControlBatchCM4SL   |
++===============================+========================+===================+========================+
+| Apo connection required       | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Startup file                  |                        | x                 | x                      |
++-------------------------------+------------------------+-------------------+------------------------+
+| DVA read and write            | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Pause and resume              | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Visualization in IPGMovie     | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Change save mode during sim   | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Quantity subscription         | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| QuantityCondition             | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| RTExprCondition               | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+
+| Parallel simulations          | x                      | x                 | x                      |
++-------------------------------+------------------------+-------------------+------------------------+
+| CarMaker for Simulink models  |                        |                   | x                      |
++-------------------------------+------------------------+-------------------+------------------------+
+| Simulation mode model check   | x                      |                   |                        |
++-------------------------------+------------------------+-------------------+------------------------+

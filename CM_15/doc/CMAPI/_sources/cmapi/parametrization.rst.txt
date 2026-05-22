@@ -1,0 +1,7 @@
+Parametrization
+===============
+
+.. automodule:: cmapi.parametrization
+   :members:
+   :undoc-members:
+   :show-inheritance:

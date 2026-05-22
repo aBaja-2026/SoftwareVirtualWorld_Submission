@@ -1,0 +1,7 @@
+Parametrization GPUConfig
+=========================
+
+.. automodule:: cmapi.parametrization_gpuconfig
+   :members:
+   :undoc-members:
+   :show-inheritance:

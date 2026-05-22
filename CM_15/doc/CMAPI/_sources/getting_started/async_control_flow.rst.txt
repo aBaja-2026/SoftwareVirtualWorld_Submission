@@ -1,0 +1,91 @@
+Asynchronous Control Flow
+===========================
+
+During runtime automation with CarMaker Python API, the user-defined Python script runs in parallel to the CarMaker simulation program. To achieve this first form of parallelism, both tasks run in individual operating system processes. However, similar to when using CarMaker as GUI-Application, where the user interface stays responsive during a simulation while handling communication with the simulation program in the background, there must exist further levels of concurrency in the automation script: The sequence of user-defined commands in the Python script runs as a foreground task, while multiple background tasks handle communication with all started CarMaker Applications and perform additional long- running tasks. Even when the end of a sequence of user-defined CarMaker Python API commands is reached, there may still be non-finished background tasks, which may live on until the last simulation has finished. This demands mechanisms to orchestrate multiple parallel tasks from within the CarMaker Python API. For this purpose, CarMaker Python API internally builds upon the Python asyncio library which supplies a framework for concurrently running tasks. Most of the time, the user of the CarMaker Python API should be completely unaware of asyncio calls happening in the background of the lower layers of the CarMaker Python API. There should however be established a basic understanding of asynchronous control flow, including correct usage of the extended Python async syntax in order to use CarMaker Python API effectively.
+
+Most CarMaker Python API commands need an asynchronous scope to be executed in. The purpose of an asynchronous scope is twofold:
+  - It allows execution of so-called asyncio `coroutine <https://docs.python.org/3.13/library/asyncio-task.html>`_ objects (or more general and interchangeably used: tasks).
+  - It defines an execution context, in which multiple parallel tasks can execute as long as the execution context exists.
+
+
+
+Without a surrounding asynchronous scope, the runtime automation via CarMaker Python API stops working as soon as the execution reached the last line of the automation script, because this results in the termination of the Python process running the script. Therefore, an asynchronous scope must be used to keep the script alive until the automation script and all background tasks have come to an end.
+
+A most basic asynchronous scope surrounding a task can be established by `asyncio.AbstractEventLoop.run_until_complete <https://docs.python.org/3/library/asyncio-eventloop.html>`_. However, it is encouraged to use the CarMaker Python API convenience function :class:`cmapi.Task.run_main_task` instead with additional capabilities, including handling of background exceptions and automatic cancellation of unfinished background tasks.
+
+To create an initial task containing runtime automation code and startup code for background tasks, an asyncio **coroutine function** should be defined by prefixing the normal function declaration with async:
+
+.. code-block:: python
+
+    async def main():
+        print("Runtime automation script...")
+
+Hereafter, the **coroutine function** must be called. This does not execute the code inside the function definition, but rather yields a **coroutine object**, which can be executed in an asynchronous context. Not until the **coroutine object** itself is executed, by passing it to :meth:`cmapi.Task.run_main_task`, the code in the coroutine function's body is being executed.
+
+.. code-block:: python
+
+    task = main()
+    cmapi.Task.run_main_task(task)
+
+or
+
+.. code-block:: python
+
+    cmapi.Task.run_main_task(main())
+
+Output:
+
+.. code-block:: python
+
+    Runtime automation script...
+
+Inside a coroutine function's body some special conditions apply:
+  - Further parallel tasks can be started by a call to the CarMaker Python API convenience function :meth:`cmapi.Task.run_task_bg` which internally uses `asyncio.ensure_future <https://docs.python.org/3.13/library/asyncio-future.html#asyncio.ensure_future>`_. This function call is **non-blocking**, and the task starts to run in parallel to the calling code.
+
+      .. code-block:: python
+
+          async def background_task():
+              print("Background task running...")
+
+          # in asynchronous context
+          cmapi.run_task_bg(background_task())
+          print("Foreground task running...")
+
+      Possible output:
+
+      .. code-block:: python
+
+          Foreground task running...
+          Background task running...
+
+  - **Coroutine objects** can be run directly as if they were given to :meth:`cmapi.Task.run_main_task`, because an asynchronous scope is already present, when the function body runs. It must be simply prefixed by the asyncio await keyword. Here, the coroutine object from some_task() is run in the already established asynchronous scope of main:
+
+    .. code-block:: python
+
+        async def some_task():
+            return 1
+
+        async def main():
+            result = await some_task()
+
+        cmapi.Task.run_main_task(main())
+
+    Executing a task via await **blocks** the calling code, until the task has finished.
+
+  - Whenever a coroutine function is called via await, the asyncio runtime has the opportunity to pass control to one of the parallel executed tasks, until this task naturally finishes or blocks at an await statement itself. Regardless of the opportunity taken or not, the control flow eventually returns to the initially awaited coroutine, which is then executed before the blocking await returns.
+
+Calling a coroutine function without await solely results in a task or coroutine object being created, which is often not the desired outcome. Therefore, it is important to distinguish between normal functions and coroutine functions which are part of the CarMaker Python API. Coroutine functions must be called with await from inside an asynchronous context. All CarMaker Python API coroutine functions are marked accordingly in the API documentation.
+
+Some particular CarMaker Python API coroutine functions internally start parallel background tasks, which continue to run, when the function returns. In this case also a remark can be found in the online documentation. These types of functions usually occur in pairs, with one function starting and the other terminating the background task, e.g.:
+
+ - :meth:`cmapi.CarMaker.start` and :meth:`cmapi.CarMaker.stop`
+ - :meth:`cmapi.SimControlInteractive.start_and_connect` and :meth:`cmapi.SimControlInteractive.stop_and_disconnect`
+ - :meth:`cmapi.Runtime.start` and :meth:`cmapi.Runtime.stop`
+
+If a background task started by the user with a call to a CarMaker Python API function is not stopped when the foreground task concludes, and the outer asynchronous scope is exited, some clean-up attempts are performed by the CarMaker Python API asynchronous runtime, but the script may still hang up and not finish properly. Therefore, it is strongly advised, to always stop all background tasks from within the automation script.
+
+One other thing to keep in mind and which will highlighted in the online documentation of the according components, is to distinguish if user-provided code is executed in the foreground task or in a background task. Some handler functions which can be provided by the user are executed in a background task, e.g. when a certain event occurs, or, when a queued variation is executed by the Runtime. In order to not deadlock the runtime or produce too many nested evaluation levels, calls to coroutine functions should be handled with care if they are not performed from within the foreground task.
+
+Asyncio usually achieves very good parallelization without relying on threads. This threadless concurrency can be involuntarily sabotaged by long-running, CPU-bound tasks omitting any call to await, eliminating the possibility to temporarily switch control to the other parallel tasks. Highly CPU-bound tasks should be run in an `concurrent.futures.ThreadPoolExecutor <https://docs.python.org/3.13/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor>`_ instead.
+
+Another pitfall arises from mixing of control flow manipulating non-asyncio and asyncio functions, the most common mistake being the use of `time.sleep <https://docs.python.org/3.13/library/time.html#time.sleep>`_ instead of :meth:`cmapi.Task.sleep` which internally uses `asyncio.sleep <https://docs.python.org/3.13/library/asyncio-task.html#asyncio.sleep>`_. In asynchronous context await asyncio.sleep(seconds) must be used to allow background tasks to execute while the calling code is suspended. Using `time.sleep <https://docs.python.org/3.13/library/time.html#time.sleep>`_ also suspends the foreground task, but in addition all background tasks are blocked as well, because control flow is never passed on.

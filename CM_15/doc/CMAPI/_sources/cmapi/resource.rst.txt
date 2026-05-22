@@ -1,0 +1,7 @@
+Resource
+========
+
+.. automodule:: cmapi.resource
+   :members:
+   :undoc-members:
+   :show-inheritance:

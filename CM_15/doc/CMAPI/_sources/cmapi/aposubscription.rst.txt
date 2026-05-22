@@ -1,0 +1,7 @@
+ApoSubscription
+===============
+
+.. automodule:: cmapi.aposubscription
+   :members:
+   :undoc-members:
+   :show-inheritance:

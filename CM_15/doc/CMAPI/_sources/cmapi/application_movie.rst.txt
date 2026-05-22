@@ -1,0 +1,8 @@
+Application Movie
+=================
+
+.. automodule:: cmapi.application_movie
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :exclude-members: cm4sl_factory_function, debug_gpusensors, gpusensor_debug_factory_function, gpusensor_debug_factory_function_ipg

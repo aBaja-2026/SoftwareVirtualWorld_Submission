@@ -1,0 +1,1162 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Vehicle" href="vehicle.html" /><link rel="prev" title="VariationExecutionPolicy" href="variation_execution.html" />
+        <link rel="prefetch" href="../_static/IPG.png" as="image" />
+
+    <link rel="shortcut icon" href="../_static/IPG_Icon_Trans64.png"/><!-- Generated with Sphinx 8.1.3 and Furo 2025.07.19 -->
+        <title>Variation - CarMaker Python API 15.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/admonition.css?v=4221c84c" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=e2be6fd5" />
+    <link rel="stylesheet" type="text/css" href="../_static/colors.css?v=311e4d33" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">CarMaker Python API 15.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/IPG.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">CarMaker Python API 15.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/parametrizing_variations.html">Parametrizing Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/executing_variations_simcontrol.html">Executing variations using SimControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/executing_variations_runtime.html">Executing variations using Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/async_control_flow.html">Asynchronous Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/minimal_examples.html">Minimal working examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/simcontrol.html">SimControl Capabilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="apoconnection.html">ApoConnection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposerverinfo.html">ApoServerInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposerver.html">ApoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposubscription.html">ApoSubscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_carmaker.html">Application Carmaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_movie.html">Application Movie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appnode.html">Appnode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="category.html">Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="condition.html">Condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error.html">Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvalue.html">NValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization.html">Parametrization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization_gpuconfig.html">Parametrization GPUConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization_outputquantities.html">Parametrization Outputquantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pathmapping.html">Pathmapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project.html">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime.html">Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessionlog.html">Sessionlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol.html">Simcontrol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol_interactive.html">SimcontrolInteractive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol_batch.html">SimcontrolBatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol_batchcm4sl.html">SimcontrolBatchCM4SL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simio.html">SimIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simstate.html">SimState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess.html">StartupProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess_apobroker.html">StartupProcessApobroker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess_ssh.html">StartupProcessSSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task.html">Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variation_execution.html">VariationExecutionPolicy</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicle.html">Vehicle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/legal_notice.html">Legal Notice</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/cmapi/variation.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-cmapi.variation">
+<span id="variation"></span><h1>Variation<a class="headerlink" href="#module-cmapi.variation" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cmapi.variation.StorageMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StorageMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.StorageMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enum of storage modes to configure the storage module of a CarMaker simulation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmapi.variation.StorageMode.save">
+<span class="sig-name descname"><span class="pre">save</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#cmapi.variation.StorageMode.save" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmapi.variation.StorageMode.buffer">
+<span class="sig-name descname"><span class="pre">buffer</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cmapi.variation.StorageMode.buffer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmapi.variation.SimulationMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimulationMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.SimulationMode" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Enum of simulation modes of CarMaker application.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmapi.variation.SimulationMode.normal">
+<span class="sig-name descname"><span class="pre">normal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#cmapi.variation.SimulationMode.normal" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cmapi.variation.SimulationMode.model_check">
+<span class="sig-name descname"><span class="pre">model_check</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#cmapi.variation.SimulationMode.model_check" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmapi.variation.SimEndInfo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimEndInfo</span></span><a class="headerlink" href="#cmapi.variation.SimEndInfo" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container class for end of simulation information.</p>
+<p>All information may be directly accessed via corresponding public member properties.
+SimEndInfo is exclusively available via Variation.get_simend_info.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.SimEndInfo.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.SimEndInfo.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Create class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmapi.variation.Variation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Variation corresponds to one simulation, which may or may not be already run.</p>
+<p>Initially a Variation holds simulation input data in form of parametrizations, initial configuration of the
+simulation program, etc.</p>
+<p>All simulation output data is stored in the Variation object and can be accessed after simulation.</p>
+<p>Variation may be adapted by the user to hold additional input data or results. This data can be accessed e.g.
+from a customized VariationExecutionPolicy or directly from the top-level automation script.</p>
+<p>A variation can be executed using a SimControl or Runtime object. For the latter, execution can be
+affected by the VariationExecutionPolicy owned by the variation.</p>
+<p>There are several ExecutionStates of the variation and not all functions can be called from all
+execution states.</p>
+<p>State transitions are:
+- Variation(): ExecutionState.created
+- Variation.create_tmp_testrun(): ExecutionState.configured
+- run Variation: ExecutionState.running
+- finish variation: ExecutionState.success, ExecutionState.error or ExecutionState.aborted
+- Variation.reset(): ExecutionState.created</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Variation class.</p>
+<p>Creates a new Variation object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of the Variation. Default is an empty string “”.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.create">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.create" title="Link to this definition">¶</a></dt>
+<dd><p>Create Variation object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cmapi.variation.Variation" title="cmapi.variation.Variation">cmapi.variation.Variation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.create_from_testrun">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_from_testrun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">testrun</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.create_from_testrun" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and returns a new Variation object, preconfigured with the given TestRun object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>testrun</strong> (<a class="reference internal" href="parametrization.html#cmapi.parametrization.TestRunParametrization" title="cmapi.parametrization.TestRunParametrization"><em>TestRunParametrization</em></a>) – A TestRunParametrization object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new Variation object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#cmapi.variation.Variation" title="cmapi.variation.Variation">Variation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.clone">
+<span class="sig-name descname"><span class="pre">clone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.clone" title="Link to this definition">¶</a></dt>
+<dd><p>Return a copy of the variation.</p>
+<p>This is a deep copy, except for the referenced OutputQuantities and TestRun objects which are shared.
+If the variation object contains members added by the user, they are copied shallowly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of the variation</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cmapi.variation.Variation" title="cmapi.variation.Variation">cmapi.variation.Variation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.reset" title="Link to this definition">¶</a></dt>
+<dd><p>Clears all simulation data and resets the execution state to ExecutionState.created.</p>
+<p>The reset variation can be used again in a simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_testrun">
+<span class="sig-name descname"><span class="pre">set_testrun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">testrun</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_testrun" title="Link to this definition">¶</a></dt>
+<dd><p>Set the Test Run for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>testrun</strong> (<a class="reference internal" href="parametrization.html#cmapi.parametrization.TestRunParametrization" title="cmapi.parametrization.TestRunParametrization"><em>TestRunParametrization</em></a>) – A TestRunParametrization object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_testrun">
+<span class="sig-name descname"><span class="pre">get_testrun</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_testrun" title="Link to this definition">¶</a></dt>
+<dd><p>Return the Test Run of this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variation’s TestRunParametrization object</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="parametrization.html#cmapi.parametrization.TestRunParametrization" title="cmapi.parametrization.TestRunParametrization">TestRunParametrization</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_user">
+<span class="sig-name descname"><span class="pre">set_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_user" title="Link to this definition">¶</a></dt>
+<dd><p>Set username for simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>str</em>) – Username as string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_user">
+<span class="sig-name descname"><span class="pre">get_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_user" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the username.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Username as string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_simulation_mode">
+<span class="sig-name descname"><span class="pre">set_simulation_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulation_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_simulation_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Set the simulation mode for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>simulation_mode</strong> (<a class="reference internal" href="#cmapi.variation.SimulationMode" title="cmapi.variation.SimulationMode"><em>cmapi.variation.SimulationMode</em></a>) – A SimulationMode object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_simulation_mode">
+<span class="sig-name descname"><span class="pre">get_simulation_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_simulation_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the configured simulation mode of this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The variation’s SimulationMode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cmapi.variation.SimulationMode" title="cmapi.variation.SimulationMode">cmapi.variation.SimulationMode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_storage_mode">
+<span class="sig-name descname"><span class="pre">set_storage_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_mode</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_storage_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Set the initial storage mode for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>storage_mode</strong> (<a class="reference internal" href="#cmapi.variation.StorageMode" title="cmapi.variation.StorageMode"><em>cmapi.variation.StorageMode</em></a>) – A StorageMode object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_storage_mode">
+<span class="sig-name descname"><span class="pre">get_storage_mode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_storage_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves the configured storage mode of this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The variation’s StorageMode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cmapi.variation.StorageMode" title="cmapi.variation.StorageMode">cmapi.variation.StorageMode</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_storage_history_ms">
+<span class="sig-name descname"><span class="pre">set_storage_history_ms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_storage_history_ms" title="Link to this definition">¶</a></dt>
+<dd><p>Set the storage history size for this variation.</p>
+<p>This has no effect, if Variation.storage_mode is not StorageMode.buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ms</strong> (<em>int</em>) – maximum history size in milliseconds. Special values: -1 to set unlimited.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_storage_history_ms">
+<span class="sig-name descname"><span class="pre">get_storage_history_ms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_storage_history_ms" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the configured history size in milliseconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The storage history size.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_name">
+<span class="sig-name descname"><span class="pre">set_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_name" title="Link to this definition">¶</a></dt>
+<dd><p>Set the name of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Variation name string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_name" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the variation name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Name of the variation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_outputquantities">
+<span class="sig-name descname"><span class="pre">set_outputquantities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputquantities</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_outputquantities" title="Link to this definition">¶</a></dt>
+<dd><p>Set OutputQuantities parametrization for the variation.</p>
+<p>OutputQuantities must be defined, if a result file should be created at some point of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>outputquantities</strong> (<a class="reference internal" href="parametrization_outputquantities.html#cmapi.parametrization_outputquantities.OutputQuantities" title="cmapi.parametrization_outputquantities.OutputQuantities"><em>cmapi.parametrization_outputquantities.OutputQuantities</em></a>) – An OutputQuantities object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_outputquantities">
+<span class="sig-name descname"><span class="pre">get_outputquantities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_outputquantities" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the configured OutputQuantities of this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The variation’s OutputQuantities object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="parametrization.html#cmapi.parametrization.Parametrization" title="cmapi.parametrization.Parametrization">cmapi.parametrization.Parametrization</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_executionstate">
+<span class="sig-name descname"><span class="pre">get_executionstate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_executionstate" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the current ExecutionState of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An enum resembling the variation’s ExecutionState.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="simstate.html#cmapi.simstate.ExecutionState" title="cmapi.simstate.ExecutionState">cmapi.simstate.ExecutionState</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_initial_realtimefactor">
+<span class="sig-name descname"><span class="pre">get_initial_realtimefactor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_initial_realtimefactor" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the initial requested realtime factor when running this simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Realtime factor when the simulation starts.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_initial_realtimefactor">
+<span class="sig-name descname"><span class="pre">set_initial_realtimefactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rt_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_initial_realtimefactor" title="Link to this definition">¶</a></dt>
+<dd><p>Set the initially requested realtime factor for the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rt_factor</strong> (<em>float</em>) – Realtime factor when the simulation starts.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_required_sensor_clusters">
+<span class="sig-name descname"><span class="pre">get_required_sensor_clusters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_required_sensor_clusters" title="Link to this definition">¶</a></dt>
+<dd><p>Returns Sensor Clusters for the configured Test Run.</p>
+<p>Includes all Sensor Clusters containing active sensor instances. In order to simulate a variation with
+Sensor Clusters, the executing SimControl must contain a GPU Sensor for each cluster.</p>
+<p>Can only be called in ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of SensorCluster objects</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="vehicle.html#cmapi.vehicle.SensorCluster" title="cmapi.vehicle.SensorCluster">cmapi.vehicle.SensorCluster</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_execution_policy">
+<span class="sig-name descname"><span class="pre">get_execution_policy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_execution_policy" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the execution policy configured for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The variation’s VariationExecutionPolicy.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>type[<a class="reference internal" href="variation_execution.html#cmapi.variation_execution.VariationExecutionPolicy" title="cmapi.variation_execution.VariationExecutionPolicy">VariationExecutionPolicy</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_execution_policy">
+<span class="sig-name descname"><span class="pre">set_execution_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_execution_policy" title="Link to this definition">¶</a></dt>
+<dd><p>Set the execution policy for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>policy</strong> (<em>type</em><em>[</em><a class="reference internal" href="variation_execution.html#cmapi.variation_execution.VariationExecutionPolicy" title="cmapi.variation_execution.VariationExecutionPolicy"><em>VariationExecutionPolicy</em></a><em>]</em>) – A VariationExecutionPolicy type.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_resource">
+<span class="sig-name descname"><span class="pre">get_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_resource" title="Link to this definition">¶</a></dt>
+<dd><p>Return a resource associated with this variation.</p>
+<p>Before a resource can be accessed by this function, the resource requests of the variation must have been
+satisfied, e.g, supplying them with a Runtime.</p>
+<p>Should not be called before ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name string of the requested resource</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the first resource matching the name or None, if no resource by this name is available.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_resource">
+<span class="sig-name descname"><span class="pre">set_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_resource" title="Link to this definition">¶</a></dt>
+<dd><p>Set a resource value by name.</p>
+<p>If multiple resources by this name exist, only the first is updated.</p>
+<p>Should not be called before ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name string of a resource.</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – The resource value to be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_resources">
+<span class="sig-name descname"><span class="pre">get_resources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_resources" title="Link to this definition">¶</a></dt>
+<dd><p>Returns resource values of all resources, optionally filtering them by name.</p>
+<p>Should not be called before ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – None or optionally name of resources.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of resource values matching name.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_resources">
+<span class="sig-name descname"><span class="pre">set_resources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_resources" title="Link to this definition">¶</a></dt>
+<dd><p>Set multiple resource values, if multiple resources with a common name exist.</p>
+<p>Should not be called before ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Resource name string.</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – A list of resource values which will be assigned to the list of matching resources.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_resource_descriptions">
+<span class="sig-name descname"><span class="pre">get_resource_descriptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_resource_descriptions" title="Link to this definition">¶</a></dt>
+<dd><p>Returns all resources required by this variation.</p>
+<p>Instead of accessing resource values via Variation.set_resource / Variation.get_resource, they may be accessed
+by their corresponding resource description objects, which contain information about the resource to be
+requested and, once supplied, a reference to the resource value itself.</p>
+<p>Should not be called before ExecutionState.configured.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Resource name string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List with ResourceDescription objects for resources used by this variation.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_kvalues">
+<span class="sig-name descname"><span class="pre">set_kvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kvalues</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_kvalues" title="Link to this definition">¶</a></dt>
+<dd><p>Set all key values for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kvalues</strong> (<em>list</em><em>[</em><a class="reference internal" href="parameter.html#cmapi.parameter.KeyValue" title="cmapi.parameter.KeyValue"><em>cmapi.parameter.KeyValue</em></a><em>]</em>) – A list of KeyValue objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_kvalues">
+<span class="sig-name descname"><span class="pre">get_kvalues</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_kvalues" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the list of key values set for this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of KeyValue objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="parameter.html#cmapi.parameter.KeyValue" title="cmapi.parameter.KeyValue">cmapi.parameter.KeyValue</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_nvalues">
+<span class="sig-name descname"><span class="pre">set_nvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nvalues</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_nvalues" title="Link to this definition">¶</a></dt>
+<dd><p>Set mappings for named values.</p>
+<p>Tuples are converted to NamedValue objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nvalues</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>] </em><em>| </em><a class="reference internal" href="nvalue.html#cmapi.nvalue.NamedValue" title="cmapi.nvalue.NamedValue"><em>cmapi.nvalue.NamedValue</em></a><em>]</em>) – A list of NamedValue objects or named values passed as tuple, e.g.</p></li>
+<li><p><strong>value</strong> (<em>- second tuple</em>) – Name of named value</p></li>
+<li><p><strong>value</strong> – Substitution value for named value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_nvalues">
+<span class="sig-name descname"><span class="pre">get_nvalues</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_nvalues" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the named value mapping of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of NamedValue objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="nvalue.html#cmapi.nvalue.NamedValue" title="cmapi.nvalue.NamedValue">cmapi.nvalue.NamedValue</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.create_tmp_testrun">
+<span class="sig-name descname"><span class="pre">create_tmp_testrun</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.create_tmp_testrun" title="Link to this definition">¶</a></dt>
+<dd><p>Finalize the variation payload.</p>
+<p>A copy of the original Test Run is created: Variation.tmp_testrun with all referenced
+sub-parametrizations replaced by tmp files.</p>
+<p>A second copy of the original Test Run is created: Variation.tmp_testrun_knval, with
+all named and key values substituted</p>
+<p>Transitions into execution state ExecutionState.configured</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.set_cm4sl_model">
+<span class="sig-name descname"><span class="pre">set_cm4sl_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mdl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.set_cm4sl_model" title="Link to this definition">¶</a></dt>
+<dd><p>Set the CarMaker for Simulink model <em>.mdl</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mdl</strong> (<em>str</em>) – Model name string</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>CarMaker for Simulink only!</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_cm4sl_model">
+<span class="sig-name descname"><span class="pre">get_cm4sl_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_cm4sl_model" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the CarMaker for Simulink model of this variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CarMaker for Simulink model name string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_result_file_paths">
+<span class="sig-name descname"><span class="pre">get_result_file_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_result_file_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Returns paths of result files collected during the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of pathlib.Path objects.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[pathlib.Path]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_start_time">
+<span class="sig-name descname"><span class="pre">get_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_start_time" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the start time of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Formatted start time string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_start_date">
+<span class="sig-name descname"><span class="pre">get_start_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_start_date" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the start date of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Formatted start date string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_result_file_path">
+<span class="sig-name descname"><span class="pre">get_result_file_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_result_file_path" title="Link to this definition">¶</a></dt>
+<dd><p>Get the result file path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A string representing the result file path.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pathlib.Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_simcontrol">
+<span class="sig-name descname"><span class="pre">get_simcontrol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_simcontrol" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimControl on which the variation is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SimControl object or None if not set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="simcontrol.html#cmapi.simcontrol.SimControl" title="cmapi.simcontrol.SimControl">SimControl</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.variation.Variation.get_simend_info">
+<span class="sig-name descname"><span class="pre">get_simend_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.variation.Variation.get_simend_info" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimEnd object belonging to the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The variation’s SimEndInfo object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#cmapi.variation.SimEndInfo" title="cmapi.variation.SimEndInfo">cmapi.variation.SimEndInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="vehicle.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Vehicle</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="variation_execution.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">VariationExecutionPolicy</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, IPG Automotive GmbH
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Variation</a><ul>
+<li><a class="reference internal" href="#cmapi.variation.StorageMode"><code class="docutils literal notranslate"><span class="pre">StorageMode</span></code></a><ul>
+<li><a class="reference internal" href="#cmapi.variation.StorageMode.save"><code class="docutils literal notranslate"><span class="pre">StorageMode.save</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.StorageMode.buffer"><code class="docutils literal notranslate"><span class="pre">StorageMode.buffer</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmapi.variation.SimulationMode"><code class="docutils literal notranslate"><span class="pre">SimulationMode</span></code></a><ul>
+<li><a class="reference internal" href="#cmapi.variation.SimulationMode.normal"><code class="docutils literal notranslate"><span class="pre">SimulationMode.normal</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.SimulationMode.model_check"><code class="docutils literal notranslate"><span class="pre">SimulationMode.model_check</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmapi.variation.SimEndInfo"><code class="docutils literal notranslate"><span class="pre">SimEndInfo</span></code></a><ul>
+<li><a class="reference internal" href="#cmapi.variation.SimEndInfo.__init__"><code class="docutils literal notranslate"><span class="pre">SimEndInfo.__init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cmapi.variation.Variation"><code class="docutils literal notranslate"><span class="pre">Variation</span></code></a><ul>
+<li><a class="reference internal" href="#cmapi.variation.Variation.__init__"><code class="docutils literal notranslate"><span class="pre">Variation.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.create"><code class="docutils literal notranslate"><span class="pre">Variation.create()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.create_from_testrun"><code class="docutils literal notranslate"><span class="pre">Variation.create_from_testrun()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.clone"><code class="docutils literal notranslate"><span class="pre">Variation.clone()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.reset"><code class="docutils literal notranslate"><span class="pre">Variation.reset()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_testrun"><code class="docutils literal notranslate"><span class="pre">Variation.set_testrun()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_testrun"><code class="docutils literal notranslate"><span class="pre">Variation.get_testrun()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_user"><code class="docutils literal notranslate"><span class="pre">Variation.set_user()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_user"><code class="docutils literal notranslate"><span class="pre">Variation.get_user()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_simulation_mode"><code class="docutils literal notranslate"><span class="pre">Variation.set_simulation_mode()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_simulation_mode"><code class="docutils literal notranslate"><span class="pre">Variation.get_simulation_mode()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_storage_mode"><code class="docutils literal notranslate"><span class="pre">Variation.set_storage_mode()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_storage_mode"><code class="docutils literal notranslate"><span class="pre">Variation.get_storage_mode()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_storage_history_ms"><code class="docutils literal notranslate"><span class="pre">Variation.set_storage_history_ms()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_storage_history_ms"><code class="docutils literal notranslate"><span class="pre">Variation.get_storage_history_ms()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_name"><code class="docutils literal notranslate"><span class="pre">Variation.set_name()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_name"><code class="docutils literal notranslate"><span class="pre">Variation.get_name()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_outputquantities"><code class="docutils literal notranslate"><span class="pre">Variation.set_outputquantities()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_outputquantities"><code class="docutils literal notranslate"><span class="pre">Variation.get_outputquantities()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_executionstate"><code class="docutils literal notranslate"><span class="pre">Variation.get_executionstate()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_initial_realtimefactor"><code class="docutils literal notranslate"><span class="pre">Variation.get_initial_realtimefactor()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_initial_realtimefactor"><code class="docutils literal notranslate"><span class="pre">Variation.set_initial_realtimefactor()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_required_sensor_clusters"><code class="docutils literal notranslate"><span class="pre">Variation.get_required_sensor_clusters()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_execution_policy"><code class="docutils literal notranslate"><span class="pre">Variation.get_execution_policy()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_execution_policy"><code class="docutils literal notranslate"><span class="pre">Variation.set_execution_policy()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_resource"><code class="docutils literal notranslate"><span class="pre">Variation.get_resource()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_resource"><code class="docutils literal notranslate"><span class="pre">Variation.set_resource()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_resources"><code class="docutils literal notranslate"><span class="pre">Variation.get_resources()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_resources"><code class="docutils literal notranslate"><span class="pre">Variation.set_resources()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_resource_descriptions"><code class="docutils literal notranslate"><span class="pre">Variation.get_resource_descriptions()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_kvalues"><code class="docutils literal notranslate"><span class="pre">Variation.set_kvalues()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_kvalues"><code class="docutils literal notranslate"><span class="pre">Variation.get_kvalues()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_nvalues"><code class="docutils literal notranslate"><span class="pre">Variation.set_nvalues()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_nvalues"><code class="docutils literal notranslate"><span class="pre">Variation.get_nvalues()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.create_tmp_testrun"><code class="docutils literal notranslate"><span class="pre">Variation.create_tmp_testrun()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.set_cm4sl_model"><code class="docutils literal notranslate"><span class="pre">Variation.set_cm4sl_model()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_cm4sl_model"><code class="docutils literal notranslate"><span class="pre">Variation.get_cm4sl_model()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_result_file_paths"><code class="docutils literal notranslate"><span class="pre">Variation.get_result_file_paths()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_start_time"><code class="docutils literal notranslate"><span class="pre">Variation.get_start_time()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_start_date"><code class="docutils literal notranslate"><span class="pre">Variation.get_start_date()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_result_file_path"><code class="docutils literal notranslate"><span class="pre">Variation.get_result_file_path()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_simcontrol"><code class="docutils literal notranslate"><span class="pre">Variation.get_simcontrol()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.variation.Variation.get_simend_info"><code class="docutils literal notranslate"><span class="pre">Variation.get_simend_info()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=cb975c41"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

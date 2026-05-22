@@ -1,0 +1,189 @@
+Parametrizing Variations
+========================
+
+Introduction
+----------------
+This section assumes, that Python and CarMaker Python API have been already set up appropriately. On how to set up Python for usage with CarMaker Python API, please consult chapter "1.3 Installing the wheels" in the `PDF documentation <../../CarMakerPythonAPIAddon.pdf>`_.
+
+CarMaker Python API uses the Python `asyncio <https://docs.python.org/3/library/asyncio.html>`_ module for parallelization. Some CarMaker Python API functions are implemented as asyncio coroutines. On how to use coroutines, see the comments in section asynchronous control flow.
+
+The first step before simulating is to configure a :class:`cmapi.Variation` which contains all information needed for the simulation. A variation corresponds to exactly one simulation pass. It initially pools all simulation input data, and after execution it contains the simulation results. In many ways this type of variation behaves similarly to a variation used in the Test Manager of the CarMaker GUI application.
+
+The so-called simulation input data can be divided in two classes:
+
+  - Input for the simulation program with
+
+    - Test Run parametrization
+    - Configuration of data storage module
+    - Configuration of simulation mode (normal simulation or model check)
+    - key values, named values
+
+  - Input for the Runtime, which is optional, and only applies, if the variation is executed in a :class:`cmapi.Runtime`
+
+    - Must be supplied in form of a :class:`cmapi.VariationExecutionPolicy` and may contain user-specified code, which is executed when the variation is handled by the runtime.
+
+The output data includes
+
+  - Execution status :class:`cmapi.ExecutionState`, to indicate if the variation has finished successfully or if errors have occurred.
+  - A reference to the log file
+  - References to result files if data storage has been requested
+
+In its lifecycle, a variation goes through various execution states, beginning with the :class:`cmapi.ExecutionState.created` state. Once the variation is fully parametrized, the :class:`cmapi.ExecutionState.configured` state is entered. On this occasion the temporary Test Run is created internally. Once the temporary Test Run has been generated, changes to the initial Test Run parametrization don't have an impact on the variation. After execution, the variation is in one of the finished states :class:`cmapi.ExecutionState.success`, :class:`cmapi.ExecutionState.error` or :class:`cmapi.ExecutionState.aborted`. Calling :meth:`cmapi.Variation.reset` on a finished variation discards all simulation results and returns to variation state :class:`cmapi.ExecutionState.created`, allowing repeated execution.
+
+Creating variations
+-------------------
+
+There are three ways to create a :class:`cmapi.Variation` and make it contain a given :class:`cmapi.TestRunParametrization`.
+
+  1. By constructor call and by supplying the Test Run manually with :meth:`cmapi.Variation.set_testrun`:
+
+    .. code-block:: python
+
+        variation = cmapi.Variation()
+        variation.set_testrun(testrun)
+
+  2. Create from :class:`cmapi.TestRun` object, using the static constructor function :meth:`cmapi.Variation.create_from_testrun`:
+
+    .. code-block:: python
+
+        variation = cmapi.Variation.create_from_testrun(testrun)
+
+  3. Clone an existing variation together with its configured Test Run:
+
+    .. code-block:: python
+
+        other_variation = variation.clone()
+
+The newly created variation is in state :class:`cmapi.ExecutionState.created` and can be further configured, by either changing the underlying :class:`cmapi.Parametrization` or by named values (:class:`cmapi.NamedValue`) and key values (:class:`cmapi.KeyValue`).
+
+Loading TestRun and sub-parametrizations
+----------------------------------------
+
+In its current state, the CarMaker Python API Addon relies on parametrization InfoFiles being created with the CarMaker GUI in advance. These files can be loaded into a :class:`cmapi.parametrization.Parametrization` and manipulated using the class interface. However, the parametrization has no built-in validity checks. Parametrization objects should be created exclusively by using the 'from InfoFile' constructors :meth:`cmapi.Project.load_testrun_parametrization`, :meth:`cmapi.Project.load_vehicle_parametrization` and :meth:`cmapi.Project.load_trailer_parametrization`.
+
+When loading a parametrization with one of the category specific functions above, the path is resolved relative to the project sub-directory for Info Files of the given category:
+
+.. code-block:: python
+
+    # Will result in lookup of "Data/Vehicle/DemoCar"
+    vehicle = cmapi.Project.instance().load_vehicle_parametrization(pathlib.Path("DemoCar"))
+
+Loading an Info File into an existing parametrization object with Project.load_parametrization will take the path set by :meth:`cmapi.Parametrization.set_path` and :class:`cmapi.Category` set by :meth:`cmapi.Parametrization.set_category` of the parametrization object to determine the full file path. If category is :class:`cmapi.category.Category.NoCategory`, no type specific directory is prepended to the path:
+
+.. code-block:: python
+
+    # will result in lookup of "Data/Sensor/CameraRSI_Sensor_Param"
+    parametrization.set_path("CameraRSI_Sensor_Param")
+    parametrization.set_category(cmapi.Category.Sensor)
+
+Creating objects of type :class:`cmapi.Parametrization` or a derived specialization, explicitly using the class constructor, results in a mostly empty parametrization without default values. Currently, CarMaker Python API does not offer a way to create a Parametrization of any type with default values. For the time being, this is exclusive to the CarMaker GUI.
+
+Changing parametrizations
+-------------------------
+:class:`cmapi.NamedValue` and :class:`cmapi.KeyValue` lists allow setting or changing parametrization values, only in the scope of a given variation:
+
+.. code-block:: python
+
+    variation.set_nvalues([("nval_Vehicle", my_vehicle), ("nval_Trailer", "Examples/HorseTrailer")])
+    variation.set_kvalues([cmapi.KeyValue(cmapi.Category.Vehicle, "SensorCluster.N", 0)])
+
+To avoid ambiguities, key values must be assigned to a :class:`cmapi.Category`. Each named value mapping is submitted as Python `tuple <https://docs.python.org/3.13/library/stdtypes.html#tuple>`_ consisting of a name and a value. This substitutes :class:`cmapi.NamedValues` with matching names in all referenced parametrizations during simulation.
+
+The parametrization object offers a mid-level interface to adapt parametrization values. For most Python types, the :class:`cmapi.Parametrization` has a built-in to-string conversion, for serialization into the Info File. The same applies for the other direction. For this reason, parameter values can be specified as string or Python value interchangeably. Internally a representation using Python values will be kept.
+
+.. code-block:: python
+
+    testrun.set_parameter_value("Road.BBox", [-1.0, 1.0,-1.0, 1.0,-1.0, 1.0])
+    testrun.set_parameter_value("Road.nJunctions", cmapi.NamedValue("rnval", 2))
+    # or as Info File string representation
+    testrun.set_parameter_value("Road.BBox", "-1.0 1.0 -1.0 1.0 -1.0 1.0")
+    testrun.set_parameter_value("Road.nJunctions", "$rnval=2")
+
+This also extends to referenced sub-parametrizations referenced by a file path, which can be supplied as string or python object (Exceptions to referenced tire files, files in non-Info File format, skc files and to some other files still do exist).
+
+.. code-block:: python
+
+    vehicle = cmapi.Project.instance().load_vehicle_parametrization(pathlib.Path("Examples/DemoCar_SensorRadarRSI"))
+    testrun.set_parameter_value("Vehicle", vehicle)
+    # or as Info File string representation
+    testrun.set_parameter_value("Vehicle", "Examples/DemoCar_SensorRadarRSI")
+
+
+String-to-Python-type conversion is performed immediately, either using default conversion rules, or explicit type conversion rules for specific keys:
+
+.. code-block:: python
+
+    testrun.set_parameter_value("Vehicle", "Examples/DemoCar_SensorRadarRSI")
+    testrun.get_parameter_value("Vehicle")
+
+Example above yields :class:`cmapi.VehicleParametrization`, when the referenced Info File can be located and loaded as sub-parametrization.
+
+Adapting a parametrization, e.g. :class:`cmapi.TestRun`, might potentially also affect other variations, containing references to the shared parametrization. If this is undesired behavior, a copy of the parametrization object can be made by using its :meth:`cmapi.Parametrization.clone` function, before modifying it:
+
+.. code-block:: python
+
+    variation = Variation.create_from_testtrun(testrun.clone())
+
+Changes to a parametrization do never overwrite the underlying Info File without being explicitly requested, instead the modified content is automatically copied to a temporary file, when a variation is executed. In this respect the behavior is similar to executing a modified Test Run with the CarMaker GUI. :class:`cmapi.Parametrization` objects like :class:`cmapi.TestRun`, :class:`cmapi.Vehicle` or :class:`cmapi.GPUConfig` all depend on an underlying Info File of the appropriate category.
+
+Full example
+------------
+
+.. code-block:: python
+
+    import cmapi
+    import pathlib
+
+
+    async def make_variations():
+        project_path = pathlib.Path("path/to/CM/project")
+        cmapi.Project.load(project_path)
+
+        testrun_path = pathlib.Path("Examples/BasicFunctions/Driver/BackAndForth")
+        testrun = cmapi.Project.instance().load_testrun_parametrization(testrun_path)
+
+        vehicle_path = pathlib.Path("Examples/DemoCar_SensorRadarRSI")
+        vehicle = cmapi.Project.instance().load_vehicle_parametrization(vehicle_path)
+
+        trailer_path = pathlib.Path("Examples/HorseTrailer")
+        trailer = cmapi.Project.instance().load_trailer_parametrization(trailer_path)
+
+        # Select vehicle by modifying the Parameter 'Vehicle' of the TestRunParametrization object.
+        # This Parameter corresponds with the Info File key 'Vehicle' in the Test Run Info File.
+        testrun.set_parameter_value("Vehicle", vehicle)
+
+        # Make a variation containing a copy of the Test Run
+        variation = cmapi.Variation.create_from_testrun(testrun.clone())
+        variation.set_name("Variation")
+
+        # Make a variation containing a trailer
+        variation_trailer = variation.clone()
+        variation_trailer.set_name("Variation with Trailer")
+
+        # Append trailer by key value for this variation
+        kvalues = []
+        kvalues.append(cmapi.KeyValue(cmapi.Category.TestRun, "Trailer", trailer))
+        variation_trailer.set_kvalues(kvalues)
+
+        return [variation, variation_trailer]
+
+
+    async def main():
+        variations = await make_variations()
+        for variation in variations:
+
+            cmapi.logger.info(f"Test Run parametrization of variation {variation.get_name()}:")
+            param_string = []
+            for parameter in variation.get_testrun().params_by_key.values():
+                param_string.append(f"{parameter.key} : {parameter.value}")
+
+            cmapi.logger.info("\n".join(param_string))
+
+
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+  Download full example <make_variations_example.py>`_

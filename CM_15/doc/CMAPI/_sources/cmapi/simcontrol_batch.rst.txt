@@ -1,0 +1,7 @@
+SimcontrolBatch
+===============
+
+.. automodule:: cmapi.simcontrol_batch
+   :members:
+   :undoc-members:
+   :show-inheritance:

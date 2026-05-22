@@ -1,0 +1,361 @@
+Minimal working examples
+========================
+
+All examples can also be found in the CarMaker installation directory in Python/Examples/.
+
+Minimal
+-------
+
+All examples can also be found in the CarMaker installation directory in Python/Examples/.
+
+This example shows how to:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Select the project directory
+  - Load and set up a Test Run
+  - Use the :class:`cmapi.Runtime`
+
+.. code-block:: python
+
+    from pathlib import Path
+
+    import cmapi
+    from cmapi import Runtime, Project, Variation
+
+
+    async def main():
+
+        runtime = Runtime.create_default_runtime()                                  # Create the runtime
+
+        project_path = Path("path/to/CM/project")
+        Project.load(project_path)                                                  # Set Project directory
+
+        testrun_path = Path("Examples/BasicFunctions/Driver/BackAndForth")
+        testrun = Project.instance().load_testrun_parametrization(testrun_path)     # Load Testrun example
+
+        variation = Variation.create_from_testrun(testrun)                          # Create a variation from testrun
+
+        await runtime.queue_variation(variation)                                    # Pass variation to runtime queue
+
+        await runtime.start()                                                       # Start runtime
+
+        await runtime.wait_until_completed()                                        # Wait until the variation is completed
+        cmapi.logger.info("All simulations finished")
+
+        await runtime.stop()                                                        # Stop runtime
+
+
+    cmapi.Task.run_main_task(main())                                                # Create asynchronous scope
+
+
+.. TODO
+  Download full example <*.py>`_
+
+
+Parametrization
+---------------
+
+Load a Test Run parametrization and create variations which can be executed later.
+
+This example shows how to:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Load various parametrizations into Parametrization objects
+  - Print content of a Parametrization object
+  - Create a Variation object
+  - Modify a variation with key values
+
+.. code-block:: python
+
+    import cmapi
+    import pathlib
+
+
+    async def make_variations():
+        project_path = pathlib.Path("path/to/CM/project")
+        cmapi.Project.load(project_path)
+
+        testrun_path = pathlib.Path("Examples/BasicFunctions/Driver/BackAndForth")
+        testrun = cmapi.Project.instance().load_testrun_parametrization(testrun_path)
+
+        vehicle_path = pathlib.Path("Examples/DemoCar_SensorRadarRSI")
+        vehicle = cmapi.Project.instance().load_vehicle_parametrization(vehicle_path)
+
+        trailer_path = pathlib.Path("Examples/HorseTrailer")
+        trailer = cmapi.Project.instance().load_trailer_parametrization(trailer_path)
+
+        # Select vehicle by modifying the Parameter 'Vehicle' of the TestRunParametrization object.
+        # This Parameter corresponds with the Info File key 'Vehicle' in the Test Run Info File.
+        testrun.set_parameter_value("Vehicle", vehicle)
+
+        # Make a variation containing a copy of the Test Run
+        variation = cmapi.Variation.create_from_testrun(testrun.clone())
+        variation.set_name("Variation")
+
+        # Make a variation containing a trailer
+        variation_trailer = variation.clone()
+        variation_trailer.set_name("Variation with Trailer")
+
+        # Append trailer by key value for this variation
+        kvalues = []
+        kvalues.append(cmapi.KeyValue(cmapi.Category.TestRun, "Trailer", trailer))
+        variation_trailer.set_kvalues(kvalues)
+
+        return [variation, variation_trailer]
+
+
+    async def main():
+        variations = await make_variations()
+        for variation in variations:
+
+            cmapi.logger.info(f"Test Run parametrization of variation {variation.get_name()}:")
+            param_string = []
+            for parameter in variation.get_testrun().params_by_key.values():
+                param_string.append(f"{parameter.key} : {parameter.value}")
+
+            cmapi.logger.info("\n".join(param_string))
+
+
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+  Download full example <*.py>`_
+
+
+ Manipulating an Info File with the Parametrization object
+    ------------------------------------------------------
+
+As an example, an entry in the Info File SimParameters is modified.
+
+.. code-block:: python
+
+    sim_params = cmapi.Parametrization()
+    sim_params.set_path(pathlib.Path("Data/Config/SimParameters"))
+    cmapi.Project.instance().load_parametrization(sim_params)
+    sim_params.set_parameter_value("DStore.BufSize_kB", 131072)
+    cmapi.Project.instance().write_parametrization(sim_params)
+
+
+.. TODO
+  Download full example <*.py>`_
+
+
+SimControl
+----------
+
+Execute a variation using an interactive SimControl.
+
+This example shows how to:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Use a SimControl and GPU Sensors
+  - Interact with simulation state through DVA and QuantityCondition objects
+
+.. code-block:: python
+
+    from parametrization_full_example import *
+
+
+    async def main():
+        variation, variation_trailer = await make_variations()
+
+        cmapi.logger.info(f"Executing with SimControl...")
+
+        simcontrol = cmapi.SimControlInteractive()
+        simcontrol.set_variation(variation)
+
+        master = cmapi.CarMaker()
+        await simcontrol.set_master(master)
+
+        gpu_sensor = cmapi.GPUSensorNX()
+        await simcontrol.set_gpusensors([gpu_sensor])
+
+        await simcontrol.start_and_connect()
+        await gpu_sensor.start()
+        await simcontrol.start_sim()
+
+        # Interactive commands
+        condition = simcontrol.create_quantity_condition(lambda car_v: car_v > 10.0, "Car.v")
+        await condition.wait()
+
+        time_10, = await simcontrol.simio.dva_read_async("Time")
+        cmapi.logger.info(f"{variation.get_name()}: Reached speed 10 m/s after {time_10} seconds")
+
+        await simcontrol.create_simstate_condition(cmapi.ConditionSimState.finished).wait()
+        await simcontrol.stop_and_disconnect()
+        await gpu_sensor.stop()
+
+        cmapi.logger.info(f"Execution with SimControl finished.")
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+    Download full example <*.py>`_
+
+
+SimControl connect to running application
+-----------------------------------------
+
+Connect to a running CarMaker application and execute a variation using an interactive SimControl.
+
+This example shows how to:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Connect to a potentially externally started CarMaker process using its PID and perform a simulation
+
+.. code-block:: python
+
+    import cmapi
+    from cmapi import SimControlInteractive
+    from cmapi import ApoServer, Application
+
+    from parametrization_full_example import make_variations
+
+
+    async def start_application(host):
+
+        application = Application.create(cmapi.AppType.CarMaker)
+        application.set_host(host)
+        await application.start()
+
+        return application
+
+
+    async def stop_application(application):
+        await application.stop()
+
+
+    async def main():
+
+        variation, variation_trailer = await make_variations()
+        variation.get_testrun().set_parameter_value("Vehicle", "Examples/Demo_IPG_CompanyCar")
+
+        PID = None
+        HOST = "localhost"
+
+        # Start CarMaker application.
+        # May be uncommented, if the application has already been started externally.
+        application = await start_application(HOST)
+
+        # Specify a pid to determine which server to connect to.
+        # May be specified manually. We use the pid of the started CarMaker application.
+        if not PID:
+            PID = application.get_pid()
+
+        # Create a handle to the apo server started with the CarMaker application.
+        sinfo = cmapi.ApoServerInfo(pid=PID, description="Idle")
+
+        master = ApoServer()
+        master.set_sinfo(sinfo)
+        master.set_host(HOST)
+
+        # Use the fact, that 'master' can be either of type cmapi.CarMaker or cmapi.ApoServer.
+        sim_control = await SimControlInteractive.create_with_master(master)
+        sim_control.set_variation(variation)
+
+        cmapi.logger.debug(f"Running servers on host: {cmapi.query_aposerverinfos(HOST)}")
+
+        # Only connect, not start_and_connect.
+        await sim_control.connect()
+        await sim_control.start_sim()
+        await sim_control.simstate.condition_finished.wait()
+        await sim_control.disconnect()
+
+        assert sim_control.sessionlog.get_entries_with_pattern("*SIM_END*BackAndForth*")
+
+        # Stop the CarMaker application.
+        await stop_application(application)
+
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+    Download full example <*.py>`_
+
+
+Runtime
+-------
+
+Execute multiple variations using a Runtime.
+
+This example shows how to:
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - Use a Runtime for simulation
+  - Use a custom ExecutionPolicy
+  - Achieve parallel execution of variations by extending the pool of available resources
+
+.. code-block:: python
+
+    from parametrization_full_example import *
+
+
+    async def main():
+        variation, variation_trailer = await make_variations()
+
+        cmapi.logger.info(f"Executing with Runtime sequential...")
+
+        # Make a custom execution policy using a DVA read
+        class DVAExecutionPolicy(cmapi.VariationExecutionPolicyInteractive):
+            @classmethod
+            async def run_variation(cls, variation):
+
+                simcontrol = variation.get_simcontrol()
+                await simcontrol.start_sim()
+
+                condition = simcontrol.create_quantity_condition(lambda car_v: car_v > 10.0, "Car.v")
+                await condition.wait()
+
+                time_10, = await simcontrol.simio.dva_read_async("Time")
+                cmapi.logger.info(f"{variation.get_name()}: Reached speed 10 m/s after {time_10} seconds")
+
+                await simcontrol.await_condition(simcontrol.simstate.condition_finished)
+
+
+        variation.set_execution_policy(DVAExecutionPolicy)
+        variation_trailer.set_execution_policy(DVAExecutionPolicy)
+
+        runtime = cmapi.Runtime.create_default_runtime()
+
+        await runtime.queue_variation(variation)
+        await runtime.queue_variation(variation_trailer)
+
+        await runtime.start()
+        await runtime.wait_until_completed()
+        await runtime.stop()
+
+        cmapi.logger.info(f"Execution with Runtime sequential finished.")
+
+        cmapi.logger.info(f"Execution with Runtime in parallel...")
+
+        pool = cmapi.StaticConfigResourcePoolCarMaker()
+        pool.set_app_nodes([cmapi.AppNode.create(cmapi.get_hostname(), 0, 10)])
+
+        runtime.set_resourcepool(cmapi.ResourceType.CarMaker, pool)
+
+        variation.reset()
+        variation_trailer.reset()
+
+        await runtime.queue_variation(variation)
+        await runtime.queue_variation(variation_trailer)
+
+        await runtime.start()
+        await runtime.wait_until_completed()
+        await runtime.stop()
+
+        cmapi.logger.info(f"Execution with Runtime parallel finished.")
+
+
+    if __name__ == "__main__":
+        cmapi.Task.run_main_task(main())
+
+
+.. TODO
+    Download full example <*.py>`_

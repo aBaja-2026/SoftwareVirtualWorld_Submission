@@ -1,0 +1,7 @@
+SimState
+========
+
+.. automodule:: cmapi.simstate
+   :members:
+   :undoc-members:
+   :show-inheritance:

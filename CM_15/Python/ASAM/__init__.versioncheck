@@ -1,0 +1,10 @@
+import sys
+import os
+req_major = %REQ_MAJOR%
+req_minor = %REQ_MINOR%
+have_major = sys.version_info[0]
+have_minor = sys.version_info[1]
+
+if have_major != req_major or have_minor != req_minor:
+    raise ImportError(f"Cannot load ASAM module found here: '{os.path.dirname(__file__)}'. Required python interpreter version for this package is {req_major}.{req_minor}, \
+but {have_major}.{have_minor} is used. Adapt sys.path to include a XIL API / Carmaker Python API package matching the used Python version.")

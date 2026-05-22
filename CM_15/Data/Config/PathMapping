@@ -1,0 +1,9 @@
+#INFOFILE1.1 (UTF-8) - Do not remove this line!
+FileIdent = FilePathMapping 1.0
+
+DirSet.ORIGIN:
+	Project C:/CM_Projects/CM_15
+	CMInstall C:/IPG/carmaker/win64-15.0
+	MovieNXInstall C:/IPG/movienx/win64-15.0
+Hosts.ORIGIN:
+	ORIGIN

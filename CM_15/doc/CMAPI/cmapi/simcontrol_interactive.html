@@ -1,0 +1,935 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="SimcontrolBatch" href="simcontrol_batch.html" /><link rel="prev" title="Simcontrol" href="simcontrol.html" />
+        <link rel="prefetch" href="../_static/IPG.png" as="image" />
+
+    <link rel="shortcut icon" href="../_static/IPG_Icon_Trans64.png"/><!-- Generated with Sphinx 8.1.3 and Furo 2025.07.19 -->
+        <title>SimcontrolInteractive - CarMaker Python API 15.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/admonition.css?v=4221c84c" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=e2be6fd5" />
+    <link rel="stylesheet" type="text/css" href="../_static/colors.css?v=311e4d33" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">CarMaker Python API 15.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/IPG.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">CarMaker Python API 15.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../getting_started/getting_started.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Introduction</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/parametrizing_variations.html">Parametrizing Variations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/executing_variations_simcontrol.html">Executing variations using SimControl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/executing_variations_runtime.html">Executing variations using Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/async_control_flow.html">Asynchronous Control Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/minimal_examples.html">Minimal working examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../getting_started/simcontrol.html">SimControl Capabilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../modules.html">API Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="apoconnection.html">ApoConnection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposerverinfo.html">ApoServerInfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposerver.html">ApoServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aposubscription.html">ApoSubscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application.html">Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_carmaker.html">Application Carmaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_movie.html">Application Movie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appnode.html">Appnode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="category.html">Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="condition.html">Condition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error.html">Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvalue.html">NValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter.html">Parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization.html">Parametrization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization_gpuconfig.html">Parametrization GPUConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parametrization_outputquantities.html">Parametrization Outputquantities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pathmapping.html">Pathmapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project.html">Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resource.html">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runtime.html">Runtime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessionlog.html">Sessionlog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol.html">Simcontrol</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">SimcontrolInteractive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol_batch.html">SimcontrolBatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simcontrol_batchcm4sl.html">SimcontrolBatchCM4SL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simio.html">SimIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simstate.html">SimState</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess.html">StartupProcess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess_apobroker.html">StartupProcessApobroker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startupprocess_ssh.html">StartupProcessSSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task.html">Task</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testrun.html">TestRun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variation_execution.html">VariationExecutionPolicy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="variation.html">Variation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicle.html">Vehicle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../legal/legal_notice.html">Legal Notice</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/cmapi/simcontrol_interactive.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-cmapi.simcontrol_interactive">
+<span id="simcontrolinteractive"></span><h1>SimcontrolInteractive<a class="headerlink" href="#module-cmapi.simcontrol_interactive" title="Link to this heading">¶</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlNotConnectedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimControlNotConnectedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlNotConnectedError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="error.html#cmapi.error.Error" title="cmapi.error.Error"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmapi.error.Error</span></code></a></p>
+<p>Raised by SimControlInteractive, if a simulation is started without an active ApoConnection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SimControlInteractive</span></span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="simcontrol.html#cmapi.simcontrol.SimControl" title="cmapi.simcontrol.SimControl"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmapi.simcontrol.SimControl</span></code></a></p>
+<p>An extension to SimControl using an ApoConnection to communicate with the simulation program during simulation.</p>
+<p>Extends the basic capabilities by:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pause, resume, abort simulation</p></li>
+<li><p>Set simulation speed</p></li>
+<li><p>Access to SessionLog “session log” during simulation</p></li>
+<li><p>Extended synchronization SimCondition “conditions”</p></li>
+<li><p>SimIO with
+* DVA
+* Remote log to session log</p></li>
+<li><p>Quantity ApoSubscription “subscriptions”</p></li>
+<li><p>Access to low level apo messages</p></li>
+</ul>
+</div></blockquote>
+<p class="rubric">References</p>
+<p>sessionlog.SessionLog
+condition.SimCondition
+aposubscription.ApoSubscription</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Create a SimControlInteractive instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.set_master">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_master</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">master</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_master" title="Link to this definition">¶</a></dt>
+<dd><p>Set the master application.</p>
+<p>The master application corresponds to a CarMaker simulation process. It can be supplied as CarMaker object
+or in form of an ApoServer object to which an ApoConnection will be established.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>master</strong> (<a class="reference internal" href="application_carmaker.html#cmapi.application_carmaker.CarMaker" title="cmapi.application_carmaker.CarMaker"><em>cmapi.application_carmaker.CarMaker</em></a><em> | </em><a class="reference internal" href="aposerver.html#cmapi.aposerver.ApoServer" title="cmapi.aposerver.ApoServer"><em>cmapi.aposerver.ApoServer</em></a>) – A CarMaker or ApoServer object.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#cmapi.error.InvalidConfigurationError" title="cmapi.error.InvalidConfigurationError"><strong>InvalidConfigurationError</strong></a> – If the master is not a CarMaker or ApoServer object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.start_sim">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_sim" title="Link to this definition">¶</a></dt>
+<dd><p>Start a simulation with the current variation, using the simulation program currently connected via apo.</p>
+<p>This method expects, that a connection has already been established by a call to
+SimControlInteractive.connect.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="error.html#cmapi.error.IncompleteConfigurationError" title="cmapi.error.IncompleteConfigurationError"><strong>IncompleteConfigurationError</strong></a> – No variation, Test Run or master application configured</p></li>
+<li><p><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlNotConnectedError" title="cmapi.simcontrol_interactive.SimControlNotConnectedError"><strong>SimControlNotConnectedError</strong></a> – SimControl not connected to CarMaker.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>variation.Variation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.stop_sim">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_sim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_sim" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the currently running simulation by sending a stop request to the simulation program via APO.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>force</strong> (<em>bool</em>) – False (default) or True to include the force flag</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.stop_master">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_master</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_master" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the master application process by sending an APO signal.</p>
+<p>After several unsuccessful attempts, the process is killed with operating system signals.
+The number of APO attempts can be configured with the config key “SimControlInteractive.ShutdownAttemptsN”</p>
+<p class="rubric">References</p>
+<p>utility.config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.start_and_connect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start_and_connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_and_connect" title="Link to this definition">¶</a></dt>
+<dd><p>Starts the simulation program and establishes an apo connection as a background task.</p>
+<p>The simulation program must be a CarMaker object supplied separately by SimControlInteractive.set_master.</p>
+<p>The same behavior can be achieved by separate calls to SimControlInteractive.start_master and
+SimControlInteractive.connect. If an ApoServer is used as master,
+e.g. only SimControlInteractive.connect should be used.</p>
+<p>A simulation can be started by SimControlInteractive.start_sim, when this method has successfully returned.</p>
+<p class="rubric">References</p>
+<p>simcontrol_interactive.SimControlInteractive.set_master
+simcontrol_interactive.SimControlInteractive.start_master
+simcontrol_interactive.SimControlInteractive.connect
+simcontrol_interactive.SimControlInteractive.start_sim
+apoconnection.ApoServer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.stop_and_disconnect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_and_disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_and_disconnect" title="Link to this definition">¶</a></dt>
+<dd><p>Stops the master CarMaker application and cuts the apo connection to the simulation program.</p>
+<p>All background tasks are terminated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.connect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.connect" title="Link to this definition">¶</a></dt>
+<dd><p>Establishes an apo connection to the master application as a background task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="error.html#cmapi.error.IncompleteConfigurationError" title="cmapi.error.IncompleteConfigurationError"><strong>IncompleteConfigurationError</strong></a> – Apo connection could not be established.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.disconnect">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.disconnect" title="Link to this definition">¶</a></dt>
+<dd><p>Disconnect the SimControl from the ApoServer of the underlying simulation program.</p>
+<p>Also disconnects all ApoSubscriptions and cancels the SessionLog background refresh.
+To allow file system synchronization before the final SessionLog update, a delay can be specified via two
+config keys “SimControlInteractive.DisconnectDelayErrorSec” and “SimControlInteractive.DisconnectDelayOkSec”
+which are used after an error and after successful simulation respectively.</p>
+<p class="rubric">References</p>
+<p>aposubscription.ApoSubscription</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.set_as_gui">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_as_gui</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_as_gui" title="Link to this definition">¶</a></dt>
+<dd><p>Imitate the GUI.</p>
+<p>CM_SESSION + “rsi” message register this simcontrol as (fake-)gui.
+If the script does not terminate normally, simprog will detect the
+loss of its gui and shut down.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="error.html#cmapi.error.IncompleteConfigurationError" title="cmapi.error.IncompleteConfigurationError"><strong>IncompleteConfigurationError</strong></a> – No ApoConnection set for SimControlInteractive.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.pause_sim">
+<span class="sig-name descname"><span class="pre">pause_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.pause_sim" title="Link to this definition">¶</a></dt>
+<dd><p>Request the simulation to pause.</p>
+<p>Effectively sets the realtime factor to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.resume_sim">
+<span class="sig-name descname"><span class="pre">resume_sim</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.resume_sim" title="Link to this definition">¶</a></dt>
+<dd><p>Request a paused simulation to resume.</p>
+<p>Effectively sets the realtime factor to the initial value of the variation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.set_realtimefactor">
+<span class="sig-name descname"><span class="pre">set_realtimefactor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">realtime_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_realtimefactor" title="Link to this definition">¶</a></dt>
+<dd><p>Set simulation speed as a multiple of realtime speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>realtime_factor</strong> (<em>float</em>) – Floating point value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.create_rtexpr_condition">
+<span class="sig-name descname"><span class="pre">create_rtexpr_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.create_rtexpr_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and returns a “real time expression” condition.</p>
+<p>The condition is registered with the currently connected master application via APO.
+The expression is evaluated every simulation cycle in the simulation program.</p>
+<p>The condition can be awaited on client side. It should be noted,
+that there will be some latency introduced by the network transmission, after the
+expression has been triggered in the simulation program.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>expression</strong> (<em>str</em>) – A string containing a valid CarMaker RTExpression</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An RTExprCondition object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="condition.html#cmapi.condition.RTExprCondition" title="cmapi.condition.RTExprCondition">cmapi.condition.RTExprCondition</a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>condition.RTExpression</p>
+<p class="rubric">Examples</p>
+<p>‘await sim_control.create_rtexpr_condition(“first(Car.v&gt;10)”).wait()’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.create_quantity_condition">
+<span class="sig-name descname"><span class="pre">create_quantity_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition_func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">quantity_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.create_quantity_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and returns a “quantity condition” associated with the master application via APO.</p>
+<p>The “quantities” (ApoQuantity) used in the expression are automatically subscribed in a background process.
+Evaluation of the condition takes place on client side. A delay may be introduced by the network transmission
+of the values via APO.</p>
+<p>The quantities are subscribed with a default update rate of 100Hz.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>condition_func</strong> (<em>Callable</em>) – A callable.
+- Must evaluate to True to indicate that the condition has triggered.
+- Must accept one additional parameter of type ApoQuantity for each quantity name in quantity_names.
+These ApoQuantities correspond to the supplied quantity names and may be used in the expression.</p></li>
+<li><p><strong>quantity_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – A quantity name string or multiple quantity name strings in a list.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A QuantityCondition object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="condition.html#cmapi.condition.QuantityCondition" title="cmapi.condition.QuantityCondition">cmapi.condition.QuantityCondition</a></p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>condition.QuantityCondition
+aposubscription.ApoQuantity</p>
+<p class="rubric">Example</p>
+<p>‘sim_control.create_quantity_condition(lambda car_v: car_v &gt; 10.0, “Car.v”)’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.start_storage_save_all">
+<span class="sig-name descname"><span class="pre">start_storage_save_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms_preceding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_storage_save_all" title="Link to this definition">¶</a></dt>
+<dd><p>Starts continuous saving of simulation data to file, as if StorageMode.save was specified.</p>
+<p>May be followed by SimControlInteractive.stop_storage_save_all to end the
+capture and finalize the output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ms_preceding</strong> (<em>int</em>) – Milliseconds from the buffer to include at the beginning.</p></li>
+<li><p><strong>values</strong> (<em>Special</em>)</p></li>
+<li><p><strong>-1</strong> – Add all samples in buffer</p></li>
+<li><p><strong>0</strong> – Don’t include buffered data (default)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.stop_storage_save_all">
+<span class="sig-name descname"><span class="pre">stop_storage_save_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_storage_save_all" title="Link to this definition">¶</a></dt>
+<dd><p>Sends a message to the server to halt storing data.</p>
+<p>Only if continuous saving of simulation data is active.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.clear_storage_buffer">
+<span class="sig-name descname"><span class="pre">clear_storage_buffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.clear_storage_buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Discards all simulation data in the buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.save_storage_buffer">
+<span class="sig-name descname"><span class="pre">save_storage_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms_preceding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms_following</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.save_storage_buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Save simulation data of the timeframe defined by ms_preceding and ms_following into output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ms_preceding</strong> (<em>int</em>) – Milliseconds from the buffer to include at the beginning.
+Special values:
+-1: Add all samples in buffer (default)
+0: Don’t include buffered data</p></li>
+<li><p><strong>ms_following</strong> (<em>int</em>) – Milliseconds from now to append at the end.
+Special values:
+-1: Add all following samples.
+This does not generate an output file until
+SimControlInteractive.stop_storage_save_all is called.
+0: Don’t include any following samples. (default)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.jump_to_maneuver">
+<span class="sig-name descname"><span class="pre">jump_to_maneuver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_no</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.jump_to_maneuver" title="Link to this definition">¶</a></dt>
+<dd><p>Request the simulation to jump to the specified maneuver step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>step_no</strong> (<em>int</em>) – Maneuver step number of the current active maneuver with combined long/lat maneuver steps</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_sessionlog">
+<span class="sig-name descname"><span class="pre">get_sessionlog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_sessionlog" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimControl’s SessionLog.</p>
+<p>This SessionLog object is automatically synced with the session log file used by the simulation program during
+simulation. This SessionLog will actively update, as long as the SimControl is connected to a simulation master
+application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The SessionLog object owned by the SimControl</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="sessionlog.html#cmapi.sessionlog.SessionLog" title="cmapi.sessionlog.SessionLog">cmapi.sessionlog.SessionLog</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_simio">
+<span class="sig-name descname"><span class="pre">get_simio</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_simio" title="Link to this definition">¶</a></dt>
+<dd><p>Returns SimControl’s SimIO.</p>
+<p>All DVA commands to the running simulation can be issued over the SimIO object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The SimIO object owned by the SimControl</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="simio.html#cmapi.simio.SimIO" title="cmapi.simio.SimIO">cmapi.simio.SimIO</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_simstate">
+<span class="sig-name descname"><span class="pre">get_simstate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_simstate" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimControl’s SimState.</p>
+<p>Simulation state related information can be queried using the SimState object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The SimState object owned by the SimControl</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="simstate.html#cmapi.simstate.SimState" title="cmapi.simstate.SimState">SimState</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_appinfo">
+<span class="sig-name descname"><span class="pre">get_appinfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_appinfo" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimControl’s CarMakerApplicationInfo.</p>
+<p>The CarMakerApplicationInfo object contains various additional information about
+the connected master application. If there is no connected master application, the app info is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The CarMakerApplicationInfo object owned by the SimControl.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="simio.html#cmapi.simio.CarMakerApplicationInfo" title="cmapi.simio.CarMakerApplicationInfo">cmapi.simio.CarMakerApplicationInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.add_subscription">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_subscription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscription</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.add_subscription" title="Link to this definition">¶</a></dt>
+<dd><p>Add an ApoSubscription object to the SimControl.</p>
+<p>As any ApoSubscription, that is managed by the SimControl, it will receive quantity updates, when a simulation
+process is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subscription</strong> (<a class="reference internal" href="aposubscription.html#cmapi.aposubscription.ApoSubscription" title="cmapi.aposubscription.ApoSubscription"><em>cmapi.aposubscription.ApoSubscription</em></a>) – ApoSubscription object to add</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.remove_subscription">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_subscription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscription</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.remove_subscription" title="Link to this definition">¶</a></dt>
+<dd><p>Remove the given ApoSubscription object from this SimControl.</p>
+<p>If the subscription was not managed by the SimControl, this has no effect.
+Otherwise, the ApoSubscription gets inactive, no longer receiving quantity updates from the simulation process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>subscription</strong> (<a class="reference internal" href="aposubscription.html#cmapi.aposubscription.ApoSubscription" title="cmapi.aposubscription.ApoSubscription"><em>cmapi.aposubscription.ApoSubscription</em></a>) – ApoSubscription object to remove</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_apo_connection">
+<span class="sig-name descname"><span class="pre">get_apo_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_apo_connection" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the SimControl’s ApoConnection.</p>
+<p>Usually there is no reason to use this directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The ApoConnection object owned by the SimControl or None if not set</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="apoconnection.html#cmapi.apoconnection.ApoConnection" title="cmapi.apoconnection.ApoConnection">ApoConnection</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.get_status">
+<span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_status" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the current SimControlState value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current SimControlState value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="simcontrol.html#cmapi.simcontrol.SimControlState" title="cmapi.simcontrol.SimControlState">cmapi.simcontrol.SimControlState</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cmapi.simcontrol_interactive.SimControlInteractive.await_condition">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">await_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cmapi.simcontrol_interactive.SimControlInteractive.await_condition" title="Link to this definition">¶</a></dt>
+<dd><p>Awaits the given SimCondition object belonging to this SimControl.</p>
+<p>Normally this is equivalent to calling <cite>await condition.wait()</cite>. However, await_condition additionally
+allows to exit the waiting prematurely, if a simulation error occurred, while directly awaiting the
+SimCondition could have resulted in an infinite wait.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>condition</strong> (<a class="reference internal" href="condition.html#cmapi.condition.SimCondition" title="cmapi.condition.SimCondition"><em>cmapi.condition.SimCondition</em></a>) – A SimCondition object</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#cmapi.error.SimulationError" title="cmapi.error.SimulationError"><strong>SimulationError</strong></a> – Raised, if a simulation error occurred while waiting for the condition.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<p>condition.SimCondition.wait</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="simcontrol_batch.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">SimcontrolBatch</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="simcontrol.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Simcontrol</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, IPG Automotive GmbH
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">SimcontrolInteractive</a><ul>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlNotConnectedError"><code class="docutils literal notranslate"><span class="pre">SimControlNotConnectedError</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive</span></code></a><ul>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.__init__"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_master"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.set_master()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_sim"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.start_sim()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_sim"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.stop_sim()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_master"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.stop_master()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_and_connect"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.start_and_connect()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_and_disconnect"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.stop_and_disconnect()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.connect"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.connect()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.disconnect"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.disconnect()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_as_gui"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.set_as_gui()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.pause_sim"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.pause_sim()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.resume_sim"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.resume_sim()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.set_realtimefactor"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.set_realtimefactor()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.create_rtexpr_condition"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.create_rtexpr_condition()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.create_quantity_condition"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.create_quantity_condition()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.start_storage_save_all"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.start_storage_save_all()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.stop_storage_save_all"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.stop_storage_save_all()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.clear_storage_buffer"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.clear_storage_buffer()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.save_storage_buffer"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.save_storage_buffer()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.jump_to_maneuver"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.jump_to_maneuver()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_sessionlog"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_sessionlog()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_simio"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_simio()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_simstate"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_simstate()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_appinfo"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_appinfo()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.add_subscription"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.add_subscription()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.remove_subscription"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.remove_subscription()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_apo_connection"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_apo_connection()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.get_status"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.get_status()</span></code></a></li>
+<li><a class="reference internal" href="#cmapi.simcontrol_interactive.SimControlInteractive.await_condition"><code class="docutils literal notranslate"><span class="pre">SimControlInteractive.await_condition()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=cb975c41"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    </body>
+</html>

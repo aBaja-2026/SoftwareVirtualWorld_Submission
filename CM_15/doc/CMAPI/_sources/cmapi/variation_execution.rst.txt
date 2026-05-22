@@ -1,0 +1,7 @@
+VariationExecutionPolicy
+========================
+
+.. automodule:: cmapi.variation_execution
+   :members:
+   :undoc-members:
+   :show-inheritance:

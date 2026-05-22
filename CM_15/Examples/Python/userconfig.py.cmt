@@ -1,0 +1,31 @@
+"""Example user configuration for CarMaker API (CMAPI).
+
+Modify this file as needed and place it in the same directory as the script.
+"""
+
+config = {
+    "IPGHOME": "$IPGHOME$",
+    "PRODUCTDIR": "$PRODUCTDIR$",
+    "ARCHBASENAME": "$ARCHBASENAME$",
+    "CARMAKER_SETVER": "$CARMAKER_SETVER$",
+    "CM.InstallDir": None,
+    "MovieNX.InstallDir": None,
+    "Matlab.ExePath": "matlab",
+    "Matlab.StrArgList": ["-nosplash"],
+    "GPUSensor.StartupTimeoutSec": 15,
+    "GPUSensorNX.StartupTimeoutSec": 40,
+    "GPUSensorNX.BaseServerPort": 11245,
+    "ApoConnection.ConnectTimeoutSec": 12.0,
+    "ApoConnection.DataPollIntervalSec": 0.001,
+    "SessionLog.MessagePollIntervalSec": 1.5,
+    "Runtime.RaiseUnhandledExceptions": False,
+    "SimControl.KeepOutputquantitiesFile": False,
+    "SimControlBatch.KeepStartupFile": False,
+    "SimControlBatch.KeepSimendFile": False,
+    "SimControlBatch.KeepTestRunTmpFiles": False,
+    "SimControlInteractive.ShutdownAttemptsN": 10,
+    "SimControlInteractive.RaiseSimErrors": True,
+    "SimControlInteractive.KeepTestRunTmpFiles": False,
+    "SimControlInteractive.DisconnectDelayOkSec": 2.0,
+    "SimControlInteractive.DisconnectDelayErrorSec": 2.0,
+}

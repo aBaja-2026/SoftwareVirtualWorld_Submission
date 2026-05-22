@@ -1,0 +1,7 @@
+Category
+========
+
+.. automodule:: cmapi.category
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+Error
+=====
+
+.. automodule:: cmapi.error
+   :members:
+   :undoc-members:
+   :show-inheritance:

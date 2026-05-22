@@ -1,0 +1,7 @@
+SimcontrolBatchCM4SL
+====================
+
+.. automodule:: cmapi.simcontrol_batchcm4sl
+   :members:
+   :undoc-members:
+   :show-inheritance:

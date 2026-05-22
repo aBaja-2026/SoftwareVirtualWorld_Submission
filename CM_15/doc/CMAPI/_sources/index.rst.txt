@@ -1,0 +1,48 @@
+.. CarMaker Python API documentation master file, created by
+   sphinx-quickstart on Tue Aug 12 16:45:13 2025.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+CarMaker Python API documentation
+=================================
+
+.. Add your content using ``reStructuredText`` syntax. See the
+   `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
+   documentation for details.
+
+The CarMaker Python API AddOn (CMAPI) is a Python package to control and automate IPG Automotive's CarMaker simulation software without using its GUI.
+It enables the user to setup and run simulations within python scripts in an automated way.
+
+The CMAPI package consists of the following modules:
+
+  - the cmapi module, which represents the core functionality of the package
+  - the apoc module, to communicate with CarMaker via the APO interface
+  - the infofiles module, to read and write InfoFiles
+  - the xilapi module, that implements the MAPort of the XIL API for CarMaker
+
+This documentation focuses solely on the 'cmapi' module. `Documentation <../CarMakerPythonAPIAddon.pdf>`_ regarding the 'xilapi' can be found as pdf format in the 'doc' folder of the CarMaker installation.
+
+Each module, except 'xilapi', is provided as a python wheel package and can be installed via pip. The 'cmapi' and 'xilapi' are built with the python limited api and a minimum python version of 3.9.
+The apoc and infofiles modules are built for a specific python version and are provided for python versions ranging from 3.9 to 3.13.
+
+
+.. note::
+
+   Previous versions of the CarMaker Python API included a 'userconfig.py' module inside the 'cmapi' package.
+   This module is now moved to the 'Examples' section and can be modified and used if necessary.
+   To use this module, edit the dictionary 'config' and place 'userconfig.py' in the same directory as the script.
+   The modified configuration will automatically loaded when importing 'cmapi'.
+
+.. caution::
+
+   The Python API reference sometimes uses 'Any' as type annotation for parameters and/or return values.
+   However, this does not mean that literally anything is allowed and is only used because of a wide range of allowed types.
+   Please always refer to the accompanying description for further information about expected types and values.
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   getting_started/getting_started.rst
+   modules.rst
+   legal/legal_notice.rst
