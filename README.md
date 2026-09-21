@@ -1,14 +1,16 @@
-# aBAJA 2026 Tech Team — Example Submission
+# aBAJA 2026 Tech Team — Submission
+
 ### aBAJA SAEINDIA 2026 | Software Virtual World Simulation
 
-**Organisation:** [aBaja-2026](https://github.com/aBaja-2026)
+**Team:** [FILL IN — team name / ID, e.g. CM_15]
+**Members:** [FILL IN — names / roles, e.g. Simulation Lead, Controls, Perception]
 
 ---
 
 ## Repository Structure
 
 ```
-├── src/          ← Autonomous driving stack (perception, planning, control)
+├── src/LKA/      ← Lane Keep Assist stack (perception, planning, control)
 ├── config/       ← Sensor configs, vehicle parameters
 ├── scenarios/    ← Scenario files (mandatory + self-created)
 ├── results/
@@ -22,11 +24,33 @@
 
 ## Simulator & Setup Instructions
 
-> *Add your simulator platform and setup/run instructions here.*
+- **Simulator:** IPG CarMaker [FILL IN version, e.g. 11.x]
+- **Scenario authoring:** Custom road and scenario environments built in RoadRunner, exported and loaded into CarMaker for simulation.
+- **Data logging:** Vector loggers used to capture real-time vehicle navigation data during physical trials, for correlation against simulated LKA behavior.
+
+**Setup steps:**
+1. Install IPG CarMaker [FILL IN version] and RoadRunner [FILL IN version].
+2. Clone this repository:
+   ```bash
+   git clone https://github.com/[FILL IN org/team]/[FILL IN repo name].git
+   ```
+3. Open the CarMaker project in `config/` [FILL IN exact path/project file name].
+4. Load a scenario from `scenarios/` [FILL IN how to select/run a scenario, e.g. via TestManager or a run script].
+5. Run the simulation and confirm outputs are written to the matching subfolder under `results/`.
+
+[FILL IN any additional dependencies, e.g. MATLAB/Simulink version, Python packages, or CAN/Vector driver setup required to run the LKA controller.]
 
 ## System Overview
 
-> *Add a brief description of your autonomous driving stack architecture here.*
+The Lane Keep Assist (LKA) stack implemented in `src/LKA/` performs:
+
+- **Perception:** [FILL IN — e.g. lane boundary detection method/sensor used in simulation]
+- **State estimation:** [FILL IN — e.g. Kalman filter or other fusion approach used to track lane position]
+- **Control:** [FILL IN — e.g. PID / MPC / state-space controller used to compute steering correction]
+
+The controller was validated in closed-loop simulation in CarMaker against both the mandatory scenarios and self-created scenarios (see `scenarios/` and `results/LKA/`), then cross-checked against on-track Vector logger data from physical trials to confirm simulated and real-world LKA behavior aligned.
+
+[FILL IN a short paragraph on architecture — how perception, state estimation, and control modules connect, and any key parameters/tuning notes worth documenting for judges.]
 
 ---
 
