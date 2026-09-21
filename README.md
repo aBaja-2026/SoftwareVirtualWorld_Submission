@@ -24,21 +24,19 @@
 
 ## Simulator & Setup Instructions
 
-- **Simulator:** IPG CarMaker [FILL IN version, e.g. 11.x]
+- **Simulator:** IPG CarMaker 
 - **Scenario authoring:** Custom road and scenario environments built in RoadRunner, exported and loaded into CarMaker for simulation.
 - **Data logging:** Vector loggers used to capture real-time vehicle navigation data during physical trials, for correlation against simulated LKA behavior.
 
 **Setup steps:**
-1. Install IPG CarMaker [FILL IN version] and RoadRunner [FILL IN version].
+1. Install IPG CarMaker  and RoadRunner.
 2. Clone this repository:
    ```bash
-   git clone https://github.com/[FILL IN org/team]/[FILL IN repo name].git
+   git clone https://github.com//aBaja-2026/SoftwareVirtualWorld_Submission.git
    ```
-3. Open the CarMaker project in `config/` [FILL IN exact path/project file name].
-4. Load a scenario from `scenarios/` [FILL IN how to select/run a scenario, e.g. via TestManager or a run script].
+3. Open the CarMaker project in `config/`.
+4. Load a scenario from `scenarios/`.
 5. Run the simulation and confirm outputs are written to the matching subfolder under `results/`.
-
-[FILL IN any additional dependencies, e.g. MATLAB/Simulink version, Python packages, or CAN/Vector driver setup required to run the LKA controller.]
 
 ## System Overview
 
